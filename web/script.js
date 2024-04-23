@@ -10,11 +10,11 @@ let device;
 const context = new (window.AudioContext || window.webkitAudioContext)();
 
 document.getElementById('buttonFile1').addEventListener('click', function() {
-    loadGeoJSON('https://raw.githubusercontent.com/muimran/betatesting_soundbath/main/web/data/myData.geojson');
+    loadGeoJSON('https://raw.githubusercontent.com/muimran/betatesting_soundbath/main/web/data/highrain.geojson');
 });
 
 document.getElementById('buttonFile2').addEventListener('click', function() {
-    loadGeoJSON('https://path/to/secondGeoJSONfile.geojson');
+    loadGeoJSON('https://raw.githubusercontent.com/muimran/betatesting_soundbath/main/web/data/myData.geojson');
 });
 
 async function main() {
