@@ -17,30 +17,37 @@
             left: 100px; 
             padding: 5px; 
             background: black;
-            font-family: Helvetica, sans-serif; /* Ensured font is set once */
-            color: black; /* Made color simpler */
-            width: 90%; /* Control the width of the info box */
-            margin: 20px; /* Adds margin around the box */
-            border: 1px solid #ccc; /* Adds a border */
-            background-color: #f9f9f9; /* Light background for the box */
-            font-size: 0.8em; /* Smaller font size for the data */
-            overflow-y: auto; /* Allows scrolling */
-            height: 200px; /* Fixed height, but can scroll */
-    
+            color: black;
+            width: 90%;
+            margin: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            font-size: 0.8em;
+            overflow-y: auto;
+            height: 200px;
+        }
+        #control-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
 
-<div id="map"> </div>
+<div id="map"></div>
 <div id="info"></div>
-
-<!-- Link to the external JavaScript file -->
+<div id="control-panel">
+    <button id="buttonFile1">Load GeoJSON File 1</button>
+    <button id="buttonFile2">Load GeoJSON File 2</button>
+</div>
 
 <script type="text/javascript" src="script.js"></script>
-
-   <!-- (Optional) The guardrails.js script isn't required for RNBO to work, and you can skip including it -->
-    <!-- It simply offers some helpful error messages for common problems -->
 <script type="text/javascript" src="guardrails.js"></script>
 
 </body>
