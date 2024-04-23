@@ -45,6 +45,9 @@ async function main() {
 }
 window.addEventListener("load", main);
 
+let geojsonData;
+
+
 function loadGeoJSON(url) {
     fetch(url)
         .then(response => {
