@@ -8,7 +8,8 @@ const map = new mapboxgl.Map({
 
 let device;
 const context = new (window.AudioContext || window.webkitAudioContext)();
-let geojsonData;
+
+let geojsonData;  // Declare the geojsonData variable globally
 
 document.getElementById('buttonFile1').addEventListener('click', function() {
     loadGeoJSON('https://raw.githubusercontent.com/muimran/betatesting_soundbath/main/web/data/highrain.geojson');
@@ -46,9 +47,6 @@ async function main() {
 }
 window.addEventListener("load", main);
 
-
-
-
 function loadGeoJSON(url) {
     fetch(url)
         .then(response => {
@@ -56,9 +54,9 @@ function loadGeoJSON(url) {
             return response.json();
         })
         .then(data => {
-            geojsonData = data;
-            map.getSource('rainfall-data').setData(geojsonData);
-            updateAverageRainfall();
+            geojsonData = data;  // Store the fetched data in the global variable
+            map.getSource('rainfall-data').setData(geojsonData);  // Update the map source with new data
+            updateAverageRainfall();  // Call function to update the display
         })
         .catch(error => console.error('Error loading the GeoJSON data: ', error));
 }
@@ -94,6 +92,7 @@ function updateAverageRainfall() {
                                                 'Stations with Rainfall > 0mm: ' + stationsWithRainfall + '<br>' +
                                                 'Visible Rainfall & Country Codes: ' + rainfallAndCountryCodes;
 }
+
 
 
 map.on('load', () => {
