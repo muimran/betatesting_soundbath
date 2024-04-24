@@ -7,19 +7,17 @@
     <meta name="rnbo-version" content="1.0.0-alpha.5">
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
-    <script src="script.js"></script>
     <script type="text/javascript" src="https://cdn.cycling74.com/rnbo/latest/rnbo.min.js"></script>
     <style>
         body { margin: 0; padding: 0; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
         #info { 
-            display: none; /* Initially hide the info box */
             position: absolute; 
-            top: 200px; 
+            top: 100px; 
             left: 20px; 
             padding: 5px; 
             background: black;
-            color: white;
+            color: black;
             width: 16%;
             border: 1px solid #ccc;
             background-color: #f9f9f9;
@@ -29,7 +27,7 @@
         }
         #control-panel {
             position: absolute;
-            top: 140px;
+            top: 40px;
             left: 20px;
             width: 16%;
             z-index: 1;
@@ -47,9 +45,9 @@
             font-size: 12px;
         }
             
-        button:hover,
-        button:focus {
-            background-color: #077DAD;
+            button:hover,
+            button:focus {
+                background-color: #077DAD;
         }
 
     </style>
@@ -61,29 +59,26 @@
 <div id="control-panel">
     <button id="buttonFile1">High Rainfall Scenario</button>
     <button id="buttonFile2">Low Rainfall Scenario</button>
+
+
 </div>
 
 <script type="text/javascript">
+    // Get references to the buttons
     const buttonFile1 = document.getElementById('buttonFile1');
     const buttonFile2 = document.getElementById('buttonFile2');
-    const infoBox = document.getElementById('info');
 
+    // Add event listeners to the buttons
     buttonFile1.addEventListener('click', function() {
+        // Set buttonFile1 to red and buttonFile2 to default
         buttonFile1.style.backgroundColor = '#077DAD';
         buttonFile2.style.backgroundColor = '';
-        infoBox.style.display = 'block'; // Show info box
     });
 
     buttonFile2.addEventListener('click', function() {
+        // Set buttonFile2 to red and buttonFile1 to default
         buttonFile2.style.backgroundColor = '#077DAD';
         buttonFile1.style.backgroundColor = '';
-        infoBox.style.display = 'block'; // Show info box
-    });
-
-    // Add event listener to the map to hide the info box when clicked
-    const map = document.getElementById('map');
-    map.addEventListener('click', function() {
-        infoBox.style.display = 'none'; // Hide info box
     });
 </script>
 
