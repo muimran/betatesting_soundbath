@@ -210,5 +210,10 @@ map.on('load', () => {
         }
     });
 
-    // You can also add more layers or functionality as needed.
+            // Initialize and update the average rainfall calculation.
+            updateAverageRainfall();
+        });
+
+    // Bind an event handler to update average rainfall whenever the map stops moving.
+    map.on('moveend', updateAverageRainfall);
 });
