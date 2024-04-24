@@ -1,9 +1,9 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoiZG93ZWxsYWYiLCJhIjoiY2x0cjJjc2VqMGVtZzJrbnYwZjcxczdkcCJ9.ljRbHHEIuM4J40yUamM8zg';
 const map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/dowellaf/cltr2h0h0007y01p7akad96el',
-    center: [-1.634654, 53.546552],
-    zoom: 4
+    container: 'map', // container ID
+    style: 'mapbox://styles/dowellaf/cltr2h0h0007y01p7akad96el', // style URL
+    center: [-1.634654, 53.546552], // starting position
+    zoom: 4 // starting zoom
 });
 
 let device;
@@ -28,7 +28,6 @@ async function main() {
         if (!patcherResponse.ok) {
             throw new Error(`Failed to fetch ${patcherUrl} (${patcherResponse.status} ${patcherResponse.statusText})`);
         }
-
         const patcher = await patcherResponse.json();
         device = await RNBO.createDevice({ context, patcher });
         device.node.connect(outputNode);
@@ -49,20 +48,19 @@ window.addEventListener("load", main);
 function loadGeoJSON(url) {
     fetch(url)
         .then(response => {
-            if (!response.ok) throw new Error('Network response was not ok');
-            return response.json();
-        })
-        .then(data => {
-            geojsonData = data;
-            map.getSource('rainfall-data').setData(geojsonData);
-            updateAverageRainfall();
-        })
-        .catch(error => console.error('Error loading the GeoJSON data: ', error));
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.json();
+    })
+    .then(data => {
+        geojsonData = data;
+        map.getSource('rainfall-data').setData(geojsonData);
+        updateAverageRainfall();
+    })
+    .catch(error => console.error('Error loading the GeoJSON data: ', error));
 }
 
 function updateAverageRainfall() {
     if (!geojsonData || !device) return;
-
     let bounds = map.getBounds();
     let visibleFeatures = geojsonData.features.filter(feature => {
         let [lng, lat] = feature.geometry.coordinates;
@@ -76,7 +74,7 @@ function updateAverageRainfall() {
     visibleFeatures.forEach(feature => {
         let rainfall = parseFloat(feature.properties.rainfall);
         let country_code = feature.properties.country_code;
-        if (!isNaN(rainfall) && rainfall >= 0 && country_code !== undefined) {
+        if (!isNaN(rainfall) && rainfall > 0 && country_code !== undefined) {
             stationsWithRainfall++;
             totalRainfall += rainfall;
             rainfallAndCountryCodes += `${rainfall} ${country_code} `;
@@ -85,27 +83,23 @@ function updateAverageRainfall() {
 
     rainfallAndCountryCodes = rainfallAndCountryCodes.trim();
     let averageRainfall = (visibleFeatures.length > 0) ? (totalRainfall / visibleFeatures.length).toFixed(2) : 'N/A';
+    let rainfall = rainfallAndCountryCodes.split(/\s+/).map(s => parseFloat(s));
 
-    let rainfallData = rainfallAndCountryCodes.split(/\s+/).map(s => parseFloat(s));
-
-    // Send the message event to the RNBO device
-    let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "RainfallData", rainfallData);
+    // Send the message event to the RNBO device NOT WORKING
+    let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "Data", rainfall);
     device.scheduleEvent(messageEvent);
 
-    document.getElementById('info').innerHTML = 'Average Rainfall: ' + averageRainfall + ' mm<br>' +
-                                                'Total Rainfall: ' + totalRainfall.toFixed(2) + ' mm<br>' +
-                                                'Total Stations: ' + visibleFeatures.length + '<br>' +
-                                                'Stations with Rainfall > 0mm: ' + stationsWithRainfall + '<br>' +
-                                                'Visible Rainfall & Country Codes: ' + rainfallAndCountryCodes;
+    document.getElementById('info').innerHTML = `Average Rainfall: ${averageRainfall} mm<br>
+    Total Rainfall: ${totalRainfall.toFixed(2)} mm<br>
+    Total Stations: ${visibleFeatures.length}<br>
+    Stations with Rainfall > 0mm: ${stationsWithRainfall}<br>
+    Visible Rainfall & Country Codes: ${rainfallAndCountryCodes}`;
 }
 
 map.on('load', () => {
     map.addSource('rainfall-data', {
         'type': 'geojson',
-        'data': {
-            "type": "FeatureCollection",
-            "features": [] // Start with an empty array
-        }
+        'data': {"type": "FeatureCollection", "features": []} // Start with an empty array
     });
 
     // Define a heatmap layer to visualize rainfall intensity
