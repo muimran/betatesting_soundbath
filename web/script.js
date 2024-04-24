@@ -43,20 +43,21 @@ async function main() {
         context.resume().then(() => console.log('Playback resumed successfully'));
     });
 }
+
 window.addEventListener("load", main);
 
 function loadGeoJSON(url) {
     fetch(url)
         .then(response => {
-        if (!response.ok) throw new Error('Network response was not ok');
-        return response.json();
-    })
-    .then(data => {
-        geojsonData = data;
-        map.getSource('rainfall-data').setData(geojsonData);
-        updateAverageRainfall();
-    })
-    .catch(error => console.error('Error loading the GeoJSON data: ', error));
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            geojsonData = data;
+            map.getSource('rainfall-data').setData(geojsonData);
+            updateAverageRainfall();
+        })
+        .catch(error => console.error('Error loading the GeoJSON data: ', error));
 }
 
 function updateAverageRainfall() {
@@ -210,9 +211,9 @@ map.on('load', () => {
         }
     });
 
-            // Initialize and update the average rainfall calculation.
-            updateAverageRainfall();
-        });
+    // Initialize and update the average rainfall calculation.
+    updateAverageRainfall();
+});
 
-    // Bind an event handler to update average rainfall whenever the map stops moving.
-    map.on('moveend', updateAverageRainfall);
+// Bind an event handler to update average rainfall whenever the map stops moving.
+map.on('moveend', updateAverageRainfall);
