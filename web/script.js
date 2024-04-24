@@ -8,8 +8,7 @@ const map = new mapboxgl.Map({
 
 let device;
 const context = new (window.AudioContext || window.webkitAudioContext)();
-
-let geojsonData;  // Declare the geojsonData variable globally
+let geojsonData;
 
 document.getElementById('buttonFile1').addEventListener('click', function() {
     loadGeoJSON('https://raw.githubusercontent.com/muimran/betatesting_soundbath/main/web/data/highrain.geojson');
@@ -54,9 +53,9 @@ function loadGeoJSON(url) {
             return response.json();
         })
         .then(data => {
-            geojsonData = data;  // Store the fetched data in the global variable
-            map.getSource('rainfall-data').setData(geojsonData);  // Update the map source with new data
-            updateAverageRainfall();  // Call function to update the display
+            geojsonData = data;
+            map.getSource('rainfall-data').setData(geojsonData);
+            updateAverageRainfall();
         })
         .catch(error => console.error('Error loading the GeoJSON data: ', error));
 }
@@ -86,6 +85,13 @@ function updateAverageRainfall() {
 
     rainfallAndCountryCodes = rainfallAndCountryCodes.trim();
     let averageRainfall = (visibleFeatures.length > 0) ? (totalRainfall / visibleFeatures.length).toFixed(2) : 'N/A';
+
+    let rainfallData = rainfallAndCountryCodes.split(/\s+/).map(s => parseFloat(s));
+
+    // Send the message event to the RNBO device
+    let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "RainfallData", rainfallData);
+    device.scheduleEvent(messageEvent);
+
     document.getElementById('info').innerHTML = 'Average Rainfall: ' + averageRainfall + ' mm<br>' +
                                                 'Total Rainfall: ' + totalRainfall.toFixed(2) + ' mm<br>' +
                                                 'Total Stations: ' + visibleFeatures.length + '<br>' +
@@ -93,15 +99,12 @@ function updateAverageRainfall() {
                                                 'Visible Rainfall & Country Codes: ' + rainfallAndCountryCodes;
 }
 
-
-
 map.on('load', () => {
-    // Initialize an empty GeoJSON source
     map.addSource('rainfall-data', {
         'type': 'geojson',
         'data': {
             "type": "FeatureCollection",
-            "features": []
+            "features": [] // Start with an empty array
         }
     });
 
