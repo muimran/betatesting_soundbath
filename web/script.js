@@ -83,7 +83,7 @@ function updateAverageRainfall() {
     });
 
     rainfallAndCountryCodes = rainfallAndCountryCodes.trim();
-    let averageRainfall = (visibleFeatures.length > 0) ? (totalRainfall / visibleFeatures.length).toFixed(2) : 'N/A';
+    let averageRainfall = (stationsWithRainfall > 0) ? (totalRainfall / stationsWithRainfall).toFixed(2) : 'N/A'; // Calculate average rainfall
     let rainfall = rainfallAndCountryCodes.split(/\s+/).map(s => parseFloat(s));
 
     // Send the message event to the RNBO device NOT WORKING
@@ -96,6 +96,7 @@ function updateAverageRainfall() {
     Stations with Rainfall > 0mm: ${stationsWithRainfall}<br>
     Visible Rainfall & Country Codes: ${rainfallAndCountryCodes}`;
 }
+
 
 map.on('load', () => {
     map.addSource('rainfall-data', {
