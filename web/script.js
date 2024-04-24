@@ -22,78 +22,86 @@ async function main() {
     try {
         const outputNode = context.createGain();
         outputNode.connect(context.destination);
+        //outputNode.gain.setValueAtTime(0, context.currentTime);
 
-        const patcherUrl = "https://raw.githubusercontent.com/muimran/betatesting_soundbath/main/export/patch.export.json";
+        const patcherUrl = "https://raw.githubusercontent.com/annadowell/soundbath2/main/export/patch.export.json";
         const patcherResponse = await fetch(patcherUrl);
+
         if (!patcherResponse.ok) {
             throw new Error(`Failed to fetch ${patcherUrl} (${patcherResponse.status} ${patcherResponse.statusText})`);
         }
+
         const patcher = await patcherResponse.json();
         device = await RNBO.createDevice({ context, patcher });
         device.node.connect(outputNode);
+
+        //context.resume();
     } catch (err) {
         console.error("Error fetching or processing patcher:", err);
+        // Display error message to the user
         const errDisplay = document.createElement("div");
         errDisplay.style.color = "red";
         errDisplay.innerHTML = `Encountered Error: <pre><code>${err.message}</pre></code>Check your console for more details.`;
         document.body.appendChild(errDisplay);
     }
 
+
+    // One-liner to resume playback when user interacts with the page.
     document.querySelector('#map').addEventListener('click', function() {
-        context.resume().then(() => console.log('Playback resumed successfully'));
+        context.resume().then(() => {
+        console.log('Playback resumed successfully');
+        });
     });
 }
 window.addEventListener("load", main);
 
-function loadGeoJSON(url) {
-    fetch(url)
-        .then(response => {
-        if (!response.ok) throw new Error('Network response was not ok');
-        return response.json();
-    })
-    .then(data => {
-        geojsonData = data;
-        map.getSource('rainfall-data').setData(geojsonData);
-        updateAverageRainfall();
-    })
-    .catch(error => console.error('Error loading the GeoJSON data: ', error));
-}
+
+let geojsonData;
+
+
 
 function updateAverageRainfall() {
-    if (!geojsonData || !device) return;
-    let bounds = map.getBounds();
-    let visibleFeatures = geojsonData.features.filter(feature => {
-        let [lng, lat] = feature.geometry.coordinates;
-        return bounds.contains([lng, lat]);
-    });
+        if (!geojsonData || !device) return;
+    
+        let bounds = map.getBounds(); // Retrieve the current geographic boundaries of the visible map area.
+        let visibleFeatures = geojsonData.features.filter(feature => {
+            let [lng, lat] = feature.geometry.coordinates;
+            return bounds.contains([lng, lat]);
+        });
+    
+        let totalRainfall = 0;
+        let stationsWithRainfall = 0;
+        let rainfallAndCountryCodes = '';
+    
+        // Calculate total rainfall and count stations with rainfall.
+        visibleFeatures.forEach(feature => {
+            let rainfall = parseFloat(feature.properties.rainfall);
+            let country_code = feature.properties.country_code;
+    
+            // Ensure rainfall and country code are defined and rainfall is greater than 0.
+            if (!isNaN(rainfall) && rainfall >= 0 && country_code !== undefined) {
+                stationsWithRainfall++;
+                totalRainfall += rainfall;
+                rainfallAndCountryCodes += `${rainfall} ${country_code} `;
+            }
+        });
+    
+        rainfallAndCountryCodes = rainfallAndCountryCodes.trim(); // Trim the final string.
+    
+        let averageRainfall = (visibleFeatures.length > 0) ? (totalRainfall / visibleFeatures.length).toFixed(2) : 'N/A';
+    
+        let rainfall = rainfallAndCountryCodes.split(/\s+/).map(s => parseFloat(s));
+    
+        // Send the message event to the RNBO device NOT WORKING
+        let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "Data", rainfall);
+        device.scheduleEvent(messageEvent);
 
-    let totalRainfall = 0;
-    let stationsWithRainfall = 0;
-    let rainfallAndCountryCodes = '';
-
-    visibleFeatures.forEach(feature => {
-        let rainfall = parseFloat(feature.properties.rainfall);
-        let country_code = feature.properties.country_code;
-        if (!isNaN(rainfall) && rainfall > 0 && country_code !== undefined) {
-            stationsWithRainfall++;
-            totalRainfall += rainfall;
-            rainfallAndCountryCodes += `${rainfall} ${country_code} `;
-        }
-    });
-
-    rainfallAndCountryCodes = rainfallAndCountryCodes.trim();
-    let averageRainfall = (visibleFeatures.length > 0) ? (totalRainfall / visibleFeatures.length).toFixed(2) : 'N/A';
-    let rainfall = rainfallAndCountryCodes.split(/\s+/).map(s => parseFloat(s));
-
-    // Send the message event to the RNBO device NOT WORKING
-    let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "Data", rainfall);
-    device.scheduleEvent(messageEvent);
-
-    document.getElementById('info').innerHTML = `Average Rainfall: ${averageRainfall} mm<br>
-    Total Rainfall: ${totalRainfall.toFixed(2)} mm<br>
-    Total Stations: ${visibleFeatures.length}<br>
-    Stations with Rainfall > 0mm: ${stationsWithRainfall}<br>
-    Visible Rainfall & Country Codes: ${rainfallAndCountryCodes}`;
+        // Update the HTML content.
+        document.getElementById('info').innerHTML = 'Average Rainfall: ' + averageRainfall + ' mm<br>' +
+                                                    'Total Rainfall: ' + totalRainfall.toFixed(2) + ' mm<br>' +
+                                                    'Total Stations: ' + visibleFeatures.length + '<br>' +
+                                                    'Stations with Rainfall > 0mm: ' + stationsWithRainfall + '<br>' +
+                                                    'Visible Rainfall & Country Codes: ' + rainfallAndCountryCodes;
 }
 
 map.on('load', () => {
