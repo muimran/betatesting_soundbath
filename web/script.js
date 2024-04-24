@@ -8,7 +8,7 @@ const map = new mapboxgl.Map({
 
 let device;
 const context = new (window.AudioContext || window.webkitAudioContext)();
-let geojsonData;
+
 
 document.getElementById('buttonFile1').addEventListener('click', function() {
     loadGeoJSON('https://raw.githubusercontent.com/muimran/betatesting_soundbath/main/web/data/highrain.geojson');
