@@ -20,28 +20,34 @@
             z-index: 100;
         }
         #popupBox {
+            display: none; /* This line ensures the popup box is hidden on initial page load */
             position: absolute;
             top: calc(30px + 7%);
             right: 30px;
-            width: 200px; /* Updated width */
-            height: auto; /* Height adjusts to content */
-            max-height: 200px; /* Optional: limits the height, makes it scrollable */
-            overflow-y: auto; /* Makes content scrollable if it exceeds max-height */
-            background: rgba(255, 255, 255, 0.9); /* Adjusted for better readability */
+            width: 225px;
+            height: auto;
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.9);
             z-index: 99;
             border: 1px solid #ccc;
             padding: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Optional: adds shadow for better visibility */
-            border-radius: 5px; /* Optional: rounds the corners */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border-radius: 5px;
         }
 
         #popupBox p {
-            margin-top: 10px; /* Adds space above each paragraph */
-            margin-bottom: 10px; /* Adds space below each paragraph */
-            line-height: 1; /* Improves readability by increasing line spacing */
+            margin-top: 10px;
+            margin-bottom: 10px;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.9s ease-out;
         }
-
-
+        #popupBox p.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
         #info {
             display: none;
             position: absolute;
@@ -84,39 +90,52 @@
 </head>
 <body>
 <img src="question.png" alt="Help" id="helpIcon">
-<div id="popupBox" style="display: none;">
-    <p><strong>Lorem Ipsam</strong><br>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
-
-    <p><strong>Lorem Ipsam</strong><br>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
-
-    <p><strong>Lorem Ipsam</strong><br>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
+<div id="popupBox">
+    <p><strong>Lorem Ipsam</strong><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
+    <p><strong>Lorem Ipsam</strong><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
+    <p><strong>Lorem Ipsam</strong><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
 </div>
-
-
 <div id="map"></div>
 <div id="info">Information content goes here</div>
 <div id="control-panel">
     <button id="buttonFile1">High Rainfall Scenario</button>
     <button id="buttonFile2">Low Rainfall Scenario</button>
 </div>
-
 <script type="text/javascript">
-    document.getElementById('helpIcon').addEventListener('click', function(event) {
-        var popupBox = document.getElementById('popupBox');
-        // Toggle the display based on current state
-        popupBox.style.display = (popupBox.style.display === 'block' ? 'none' : 'block');
-        event.stopPropagation(); // Stop the click from propagating to the document
+    document.addEventListener('DOMContentLoaded', function () {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, {
+            root: document.getElementById('popupBox'),
+            rootMargin: '0px 50px 0px 50px',
+            threshold: .9
+        });
+
+        document.querySelectorAll('#popupBox p').forEach(p => {
+            observer.observe(p);
+        });
     });
+
+    document.getElementById('helpIcon').addEventListener('click', function(event) {
+            var popupBox = document.getElementById('popupBox');
+            popupBox.style.display = (popupBox.style.display === 'block' ? 'none' : 'block');
+            event.stopPropagation();
+    });
+
+
     document.getElementById('popupBox').addEventListener('click', function(event) {
-        event.stopPropagation(); // Prevent clicks within the popup from closing it
+        event.stopPropagation();
     });
 
     document.addEventListener('click', function() {
         var popupBox = document.getElementById('popupBox');
-        popupBox.style.display = 'none'; // Hide the popup when clicking anywhere else
+        popupBox.style.display = 'none';
     });
 
     const buttonFile1 = document.getElementById('buttonFile1');
@@ -136,6 +155,5 @@
     });
 </script>
 <script type="text/javascript" src="script.js"></script>
-<script type="text/javascript" src="guardrails.js"></script>
-</body>
+<script type="text...
 </html>
