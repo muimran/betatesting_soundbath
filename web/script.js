@@ -85,15 +85,19 @@ async function main() {
     document.getElementById('playMusic').addEventListener('click', function() {
         context.resume().then(() => {
             console.log('Audio playback resumed successfully');
-            // Assuming the audio setup is complete and the device is ready
             if (device && device.node && typeof device.node.start === 'function') {
-                device.node.start(); // Start playing
-                map.flyTo({zoom: 5}); // Animate map zoom to level 5
+                device.node.start(); // Start playing music
+                if (map) {
+                    map.flyTo({ center: [-2.034654, 55.546552], zoom: 5 }); // Ensure the map is defined and fly to a specific zoom
+                } else {
+                    console.error('Map object is not defined.');
+                }
             } else {
                 console.error('Device not ready or start method not available on node.');
             }
         }).catch(err => console.error('Could not resume audio:', err));
     });
+    
     
 
     document.querySelector('#map').addEventListener('click', function() {
