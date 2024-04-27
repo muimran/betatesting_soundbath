@@ -88,11 +88,13 @@ async function main() {
             // Assuming the audio setup is complete and the device is ready
             if (device && device.node && typeof device.node.start === 'function') {
                 device.node.start(); // Start playing
+                map.flyTo({zoom: 5}); // Animate map zoom to level 5
             } else {
                 console.error('Device not ready or start method not available on node.');
             }
         }).catch(err => console.error('Could not resume audio:', err));
     });
+    
 
     document.querySelector('#map').addEventListener('click', function() {
         context.resume().then(() => console.log('Playback resumed successfully'));
