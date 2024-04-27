@@ -59,13 +59,15 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('info').style.display = 'block';
     });
 
-    // Ensure all map interactions happen after the map is fully loaded
+    // Enhanced map load event handling
     map.on('load', function() {
+        document.getElementById('playMusic').disabled = true; // Disable the button initially
         document.getElementById('playMusic').addEventListener('click', function() {
             context.resume().then(() => {
                 console.log('Audio playback resumed successfully');
                 if (device && device.node && typeof device.node.start === 'function') {
                     device.node.start();
+                    console.log('Attempting to fly to zoom 5'); // Debugging output
                     map.flyTo({center: [-2.034654, 55.546552], zoom: 5});
                 } else {
                     console.error('Device not ready or start method not available on node.');
@@ -74,9 +76,33 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Could not resume audio:', err);
             });
         });
+        initializeDevice(); // Setup your device here
     });
 });
 
+
+// Function to initialize your device
+async function initializeDevice() {
+    try {
+        const outputNode = context.createGain();
+        outputNode.connect(context.destination);
+        const patcherUrl = "https://your_url_here/patch.export.json";
+        const patcherResponse = await fetch(patcherUrl);
+        if (!patcherResponse.ok) {
+            throw new Error(`Failed to fetch ${patcherUrl} (${patcherResponse.status} ${patcherResponse.statusText})`);
+        }
+        const patcher = await patcherResponse.json();
+        device = await RNBO.createDevice({ context, patcher });
+        device.node.connect(outputNode);
+        document.getElementById('playMusic').disabled = false;  // Enable the button once the device is ready
+    } catch (err) {
+        console.error("Error initializing device:", err);
+        const errDisplay = document.createElement("div");
+        errDisplay.style.color = "red";
+        errDisplay.innerHTML = `Encountered Error: <pre><code>${err.message}</pre></code>Check your console for more details.`;
+        document.body.appendChild(errDisplay);
+    }
+}
 
 async function main() {
     try {
