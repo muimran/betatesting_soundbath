@@ -58,7 +58,25 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('buttonFile1').style.backgroundColor = '';
         document.getElementById('info').style.display = 'block';
     });
+
+    // Ensure all map interactions happen after the map is fully loaded
+    map.on('load', function() {
+        document.getElementById('playMusic').addEventListener('click', function() {
+            context.resume().then(() => {
+                console.log('Audio playback resumed successfully');
+                if (device && device.node && typeof device.node.start === 'function') {
+                    device.node.start();
+                    map.flyTo({center: [-2.034654, 55.546552], zoom: 5});
+                } else {
+                    console.error('Device not ready or start method not available on node.');
+                }
+            }).catch(err => {
+                console.error('Could not resume audio:', err);
+            });
+        });
+    });
 });
+
 
 async function main() {
     try {
@@ -81,22 +99,7 @@ async function main() {
         document.body.appendChild(errDisplay);
     }
 
-    // Button to play music
-    document.getElementById('playMusic').addEventListener('click', function() {
-        context.resume().then(() => {
-            console.log('Audio playback resumed successfully');
-            if (device && device.node && typeof device.node.start === 'function') {
-                device.node.start(); // Start playing music
-                if (map) {
-                    map.flyTo({ center: [-2.034654, 55.546552], zoom: 5 }); // Ensure the map is defined and fly to a specific zoom
-                } else {
-                    console.error('Map object is not defined.');
-                }
-            } else {
-                console.error('Device not ready or start method not available on node.');
-            }
-        }).catch(err => console.error('Could not resume audio:', err));
-    });
+   
     
     
 
