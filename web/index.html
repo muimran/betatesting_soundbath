@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Rainfall Radar Map</title>
+    <title>Soundbath User Testing</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta name="rnbo-version" content="1.0.0-alpha.5">
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
@@ -12,36 +12,79 @@
         body { margin: 0; padding: 0; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
         #info { 
+            display: none; /* Initially hide the info box */
             position: absolute; 
-            top: 10px; 
-            left: 100px; 
+            top: 200px; 
+            left: 20px; 
             padding: 5px; 
             background: black;
-            font-family: Helvetica, sans-serif; /* Ensured font is set once */
-            color: black; /* Made color simpler */
-            width: 90%; /* Control the width of the info box */
-            margin: 20px; /* Adds margin around the box */
-            border: 1px solid #ccc; /* Adds a border */
-            background-color: #f9f9f9; /* Light background for the box */
-            font-size: 0.8em; /* Smaller font size for the data */
-            overflow-y: auto; /* Allows scrolling */
-            height: 200px; /* Fixed height, but can scroll */
-    
+            color: black; /* Ensuring text is visible */
+            width: 16%;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            font-size: 0.8em;
+            overflow-y: auto;
+            height: 450px;
+        }
+
+        #control-panel {
+            position: absolute;
+            top: 140px;
+            left: 20px;
+            width: 16%;
+            z-index: 1;
+            background-color: none;
+            border: 0px  #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        button {
+            color: #F7F9FA;
+            background-color: #292A2B;
+            border: none;
+            box-shadow: none;
+            outline: none;
+            font-size: 12px;
+        }
+        button:hover,
+        button:focus {
+            background-color: #077DAD;
         }
     </style>
 </head>
 <body>
+<div id="map"></div>
+<div id="info">Information content goes here</div>
+<div id="control-panel">
+    <button id="buttonFile1">High Rainfall Scenario</button>
+    <button id="buttonFile2">Low Rainfall Scenario</button>
+</div>
 
-<div id="map"> </div>
-<div id="info"></div>
+<script type="text/javascript">
+    const buttonFile1 = document.getElementById('buttonFile1');
+    const buttonFile2 = document.getElementById('buttonFile2');
+    const infoBox = document.getElementById('info');
 
-<!-- Link to the external JavaScript file -->
+    buttonFile1.addEventListener('click', function() {
+        buttonFile1.style.backgroundColor = '#077DAD';
+        buttonFile2.style.backgroundColor = '';
+        infoBox.style.display = 'block'; // Show info box
+    });
+
+    buttonFile2.addEventListener('click', function() {
+        buttonFile2.style.backgroundColor = '#077DAD';
+        buttonFile1.style.backgroundColor = '';
+        infoBox.style.display = 'block'; // Show info box
+    });
+
+    // // Optionally, add an event listener to the map to hide the info box when clicked
+    // const map = document.getElementById('map');
+    // map.addEventListener('click', function() {
+    //     infoBox.style.display = 'none'; // Hide info box
+    // });
+</script>
 
 <script type="text/javascript" src="script.js"></script>
-
-   <!-- (Optional) The guardrails.js script isn't required for RNBO to work, and you can skip including it -->
-    <!-- It simply offers some helpful error messages for common problems -->
 <script type="text/javascript" src="guardrails.js"></script>
-
 </body>
 </html>
