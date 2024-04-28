@@ -13,12 +13,66 @@
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
         #helpIcon {
             position: absolute;
-            top: 30px;
+            top: 45px;
             right: 30px;
-            max-width: 7%;
-            max-height: 7%;
+            width: 40px; /* Adjust to match your image size */
+            height: 40px;
             z-index: 100;
+            cursor: pointer;
         }
+
+        #helpIcon::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, #e7e56c 50%);
+            background-size: 100% 200%;
+            transition: background-position 0.5s;
+            -webkit-mask-image: url('question-mark-mask.png'); /* Ensure this file exists and is correct */
+            mask-image: url('question-mark-mask.png');
+            mask-size: cover;
+            pointer-events: none; /* Ignore mouse events on the pseudo-element */
+        }
+
+        #helpIcon:hover::after {
+            background-position: 0 -100%;
+        }
+
+
+
+        #infoIcon {
+            position: absolute;
+            top: 100px;
+            right: 30px;
+            width: 40px; /* Adjust to match your image size */
+            height: 40px;
+            z-index: 100;
+            cursor: pointer;
+        }
+
+        #infoIcon::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, #e7e56c 50%);
+            background-size: 100% 200%;
+            transition: background-position 0.5s;
+            -webkit-mask-image: url('information_mask.png'); /* Ensure this file exists and is correct */
+            mask-image: url('information_mask.png');
+            mask-size: cover;
+            pointer-events: none; /* Ignore mouse events on the pseudo-element */
+        }
+
+        #infoIcon:hover::after {
+            background-position: 0 -100%;
+        }
+
         #popupBox {
             display: none; /* This line ensures the popup box is hidden on initial page load */
             position: absolute;
@@ -68,24 +122,40 @@
  
 
             #start {
-            display: block;
-            position: relative;
-            top: 200px;
-            margin: 0px auto;
-            width: 20%;
-            height: 40px;
-            padding: 10px;
-            border: none;
-            border-radius: 3px;
-            font-size: 12px;
-            text-align: center;
-            color: #fff;
-            background: #ee8a65;
+            position: absolute;
+            top: 20%;  /* Keep it at 20% from the top */
+            left: 50%; /* Center horizontally in relation to the entire display */
+            width: 120px; /* Width of the button */
+            height: 120px; /* Height of the button */
+            z-index: 100;
+            cursor: pointer;
+            animation: pulse 3s infinite;
+            transform: translateX(-50%); /* Shifts the button to the left by half its width */
         }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1); /* Start and end at normal size */
+            }
+            50% {
+                transform: scale(0.8); /* Shrink to 90% size at halfway point */
+            }
+        }
+
+       
+
     </style>
 </head>
 <body>
-<img src="question.png" alt="Help" id="helpIcon">
+    <div id="helpIcon">
+        <img src="question.svg" alt="Help" style="width:100%; height:100%;"> <!-- Ensure this image path is correct -->
+    </div>
+    <div id="infoIcon">
+        <img src="information.svg" alt="Help" style="width:100%; height:100%;"> <!-- Ensure this image path is correct -->
+    </div>
+    <div id="start">
+        <img src="start_button.svg" alt="Help" style="width:100%; height:100%;"> <!-- Ensure this image path is correct -->
+    </div>
 <div id="popupBox">
     <p><strong>Lorem Ipsam</strong><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
     <p><strong>Lorem Ipsam</strong><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
@@ -93,7 +163,7 @@
 </div>
 <div id="map"></div>
 <div id="info">Information content goes here</div>
-<button id="start">start</button>
+
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
         const observer = new IntersectionObserver((entries) => {
