@@ -75,11 +75,11 @@ async function main() {
 
 
     // One-liner to resume playback when user interacts with the page.
-    document.querySelector('#map').addEventListener('click', function() {
-        context.resume().then(() => {
-        console.log('Playback resumed successfully');
-        });
-    });
+    // document.querySelector('#map').addEventListener('click', function() {
+    //     context.resume().then(() => {
+    //     console.log('Playback resumed successfully');
+    //     });
+    // });
 }
 window.addEventListener("load", main);
 
