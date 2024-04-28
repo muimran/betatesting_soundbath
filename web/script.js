@@ -29,7 +29,7 @@ document.getElementById('start').addEventListener('click', () => {
     // Fly to the new map position
     map.flyTo({
         ...target,
-        duration: 8000,
+        duration: 6000,
         essential: true
     });
 
@@ -43,15 +43,19 @@ document.getElementById('start').addEventListener('click', () => {
     // Hide the start button immediately after it is clicked
     document.getElementById('start').style.display = 'none';
 
-    // Enable map interactions
-    map.boxZoom.enable();
-    map.scrollZoom.enable();
-    map.dragPan.enable();
-    map.dragRotate.enable();
-    map.keyboard.enable();
-    map.doubleClickZoom.enable();
-    map.touchZoomRotate.enable();
+    // Listen for when the map has finished flying to the new location
+    map.once('moveend', () => {
+        // Enable map interactions only after the fly to has completed
+        map.boxZoom.enable();
+        map.scrollZoom.enable();
+        map.dragPan.enable();
+        map.dragRotate.enable();
+        map.keyboard.enable();
+        map.doubleClickZoom.enable();
+        map.touchZoomRotate.enable();
+    });
 });
+
 
 
 
