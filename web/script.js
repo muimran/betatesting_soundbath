@@ -33,18 +33,14 @@ document.getElementById('start').addEventListener('click', () => {
         essential: true
     });
 
-    // Attempt to resume the audio context to start playing music
-    context.resume().then(() => {
-        console.log('Playback resumed successfully');
-    }).catch(err => {
-        console.error('Playback failed to resume:', err);
-    });
-
-    // Hide the start button immediately after it is clicked
-    document.getElementById('start').style.display = 'none';
-
-    // Listen for when the map has finished flying to the new location
+    // Delay starting the audio context until after the fly-to animation
     map.once('moveend', () => {
+        context.resume().then(() => {
+            console.log('Playback resumed successfully');
+        }).catch(err => {
+            console.error('Playback failed to resume:', err);
+        });
+
         // Enable map interactions only after the fly to has completed
         map.boxZoom.enable();
         map.scrollZoom.enable();
@@ -54,7 +50,11 @@ document.getElementById('start').addEventListener('click', () => {
         map.doubleClickZoom.enable();
         map.touchZoomRotate.enable();
     });
+
+    // Hide the start button immediately after it is clicked
+    document.getElementById('start').style.display = 'none';
 });
+
 
 
 
