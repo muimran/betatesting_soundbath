@@ -21,14 +21,10 @@ const end = {
     pitch: 0
 };
 
+
 document.getElementById('start').addEventListener('click', () => {
     const target = isAtStart ? end : start;
     isAtStart = !isAtStart;
-
-    // Enable map interactions when the start button is clicked
-    map.once('moveend', () => {
-        map.setInteractive(true);
-    });
 
     // Fly to the new map position
     map.flyTo({
@@ -46,7 +42,17 @@ document.getElementById('start').addEventListener('click', () => {
 
     // Hide the start button immediately after it is clicked
     document.getElementById('start').style.display = 'none';
+
+    // Enable map interactions
+    map.boxZoom.enable();
+    map.scrollZoom.enable();
+    map.dragPan.enable();
+    map.dragRotate.enable();
+    map.keyboard.enable();
+    map.doubleClickZoom.enable();
+    map.touchZoomRotate.enable();
 });
+
 
 
 let device;
