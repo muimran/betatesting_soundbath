@@ -1,63 +1,21 @@
-// Set the Mapbox access token
 mapboxgl.accessToken = 'pk.eyJ1IjoiZG93ZWxsYWYiLCJhIjoiY2x0cjJjc2VqMGVtZzJrbnYwZjcxczdkcCJ9.ljRbHHEIuM4J40yUamM8zg';
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/dowellaf/cltr2h0h0007y01p7akad96el', // style URL
     center: [-2.034654, 55.546552], // starting position
-    zoom: 0 // starting zoom
+    zoom: 1 // starting zoom
 });
 
 let device;
 const context = new (window.AudioContext || window.webkitAudioContext)();
 let geojsonData;
 
-document.addEventListener('DOMContentLoaded', function () {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            } else {
-                entry.target.classList.remove('active');
-            }
-        });
-    }, {
-        root: document.getElementById('popupBox'),
-        rootMargin: '50px 50px 50px 50px',
-        threshold: 0.9
-    });
+document.getElementById('buttonFile1').addEventListener('click', function() {
+    loadGeoJSON('https://raw.githubusercontent.com/muimran/betatesting_soundbath/main/web/data/highrain.geojson');
+});
 
-    document.querySelectorAll('#popupBox p').forEach(p => {
-        observer.observe(p);
-    });
-
-    document.getElementById('helpIcon').addEventListener('click', function(event) {
-        var popupBox = document.getElementById('popupBox');
-        popupBox.style.display = (popupBox.style.display === 'block' ? 'none' : 'block');
-        event.stopPropagation();
-    });
-
-    document.getElementById('popupBox').addEventListener('click', function(event) {
-        event.stopPropagation();
-    });
-
-    document.addEventListener('click', function() {
-        var popupBox = document.getElementById('popupBox');
-        popupBox.style.display = 'none';
-    });
-
-    document.getElementById('buttonFile1').addEventListener('click', function() {
-        loadGeoJSON('https://raw.githubusercontent.com/muimran/betatesting_soundbath/main/web/data/highrain.geojson');
-        this.style.backgroundColor = '#077DAD';
-        document.getElementById('buttonFile2').style.backgroundColor = '';
-        document.getElementById('info').style.display = 'block';
-    });
-
-    document.getElementById('buttonFile2').addEventListener('click', function() {
-        loadGeoJSON('https://raw.githubusercontent.com/muimran/betatesting_soundbath/main/web/data/myData.geojson');
-        this.style.backgroundColor = '#077DAD';
-        document.getElementById('buttonFile1').style.backgroundColor = '';
-        document.getElementById('info').style.display = 'block';
-    });
+document.getElementById('buttonFile2').addEventListener('click', function() {
+    loadGeoJSON('https://raw.githubusercontent.com/muimran/betatesting_soundbath/main/web/data/myData.geojson');
 });
 
 async function main() {
@@ -128,7 +86,7 @@ function updateAverageRainfall() {
     let averageRainfall = (stationsWithRainfall > 0) ? (totalRainfall / stationsWithRainfall).toFixed(2) : 'N/A'; // Calculate average rainfall
     let rainfall = rainfallAndCountryCodes.split(/\s+/).map(s => parseFloat(s));
 
-    // Send the message event to the RNBO device
+    // Send the message event to the RNBO device NOT WORKING
     let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "Data", rainfall);
     device.scheduleEvent(messageEvent);
 
@@ -138,6 +96,7 @@ function updateAverageRainfall() {
     Stations with Rainfall > 0mm: ${stationsWithRainfall}<br>
     Visible Rainfall & Country Codes: ${rainfallAndCountryCodes}`;
 }
+
 
 map.on('load', () => {
     map.addSource('rainfall-data', {
@@ -257,4 +216,5 @@ map.on('load', () => {
     updateAverageRainfall();
 });
 
+// Bind an event handler to update average rainfall whenever the map stops moving.
 map.on('moveend', updateAverageRainfall);

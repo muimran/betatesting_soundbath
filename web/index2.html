@@ -65,22 +65,28 @@
             overflow-y: auto;
             height: 450px;
         }
- 
-
-            #start {
-            display: block;
-            position: relative;
-            top: 200px;
-            margin: 0px auto;
-            width: 20%;
-            height: 40px;
+        #control-panel {
+            position: absolute;
+            top: 140px;
+            left: 20px;
+            width: 16%;
+            z-index: 1;
+            background-color: none;
+            border: 0px;
             padding: 10px;
+            border-radius: 5px;
+        }
+        button {
+            color: #F7F9FA;
+            background-color: #292A2B;
             border: none;
-            border-radius: 3px;
+            box-shadow: none;
+            outline: none;
             font-size: 12px;
-            text-align: center;
-            color: #fff;
-            background: #ee8a65;
+        }
+        button:hover,
+        button:focus {
+            background-color: #077DAD;
         }
     </style>
 </head>
@@ -93,7 +99,10 @@
 </div>
 <div id="map"></div>
 <div id="info">Information content goes here</div>
-<button id="start">start</button>
+<div id="control-panel">
+    <button id="buttonFile1">High Rainfall Scenario</button>
+    <button id="buttonFile2">Low Rainfall Scenario</button>
+</div>
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
         const observer = new IntersectionObserver((entries) => {
@@ -131,7 +140,21 @@
         popupBox.style.display = 'none';
     });
 
+    const buttonFile1 = document.getElementById('buttonFile1');
+    const buttonFile2 = document.getElementById('buttonFile2');
+    const infoBox = document.getElementById('info');
 
+    buttonFile1.addEventListener('click', function() {
+        buttonFile1.style.backgroundColor = '#077DAD';
+        buttonFile2.style.backgroundColor = '';
+        infoBox.style.display = 'block';
+    });
+
+    buttonFile2.addEventListener('click', function() {
+        buttonFile2.style.backgroundColor = '#077DAD';
+        buttonFile1.style.backgroundColor = '';
+        infoBox.style.display = 'block';
+    });
 </script>
 <script type="text/javascript" src="script.js"></script>
 <script type="text...
