@@ -2,14 +2,14 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZG93ZWxsYWYiLCJhIjoiY2x0cjJjc2VqMGVtZzJrbnYwZ
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/dowellaf/cltr2h0h0007y01p7akad96el', // style URL
-    center: [-50, -100], // starting position
+    center: [-50, -120], // starting position
     zoom: 0, // starting zoom
     interactive: false // Disable all map interactions initially
 });
 
 let isAtStart = true;
 const start = {
-    center: [-50, -100],
+    center: [-50, -120],
     zoom: 0,
     pitch: 0,
     bearing: 250
