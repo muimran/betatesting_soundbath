@@ -24,11 +24,20 @@ document.getElementById('start').addEventListener('click', () => {
     const target = isAtStart ? end : start;
     isAtStart = !isAtStart;
 
+    // Fly to the new map position
     map.flyTo({
         ...target,
         duration: 8000,
         essential: true
     });
+
+    // Attempt to resume the audio context to start playing music
+    context.resume().then(() => {
+        console.log('Playback resumed successfully');
+    }).catch(err => {
+        console.error('Playback failed to resume:', err);
+    });
+
     // Hide the start button immediately after it is clicked
     document.getElementById('start').style.display = 'none';
 });
@@ -111,7 +120,7 @@ function updateAverageRainfall() {
     
         let rainfall = rainfallAndCountryCodes.split(/\s+/).map(s => parseFloat(s));
     
-        // Send the message event to the RNBO device NOT WORKING
+        // Send the message event to the RNBO device 
         let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "Data", rainfall);
         device.scheduleEvent(messageEvent);
 
