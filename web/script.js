@@ -3,7 +3,8 @@ const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/dowellaf/cltr2h0h0007y01p7akad96el', // style URL
     center: [-1.634654, 53.546552], // starting position
-    zoom: 0 // starting zoom
+    zoom: 0, // starting zoom
+    interactive: false // Disable all map interactions initially
 });
 
 let isAtStart = true;
@@ -24,6 +25,11 @@ document.getElementById('start').addEventListener('click', () => {
     const target = isAtStart ? end : start;
     isAtStart = !isAtStart;
 
+    // Enable map interactions when the start button is clicked
+    map.once('moveend', () => {
+        map.setInteractive(true);
+    });
+
     // Fly to the new map position
     map.flyTo({
         ...target,
@@ -41,6 +47,7 @@ document.getElementById('start').addEventListener('click', () => {
     // Hide the start button immediately after it is clicked
     document.getElementById('start').style.display = 'none';
 });
+
 
 let device;
 const context = new (window.AudioContext || window.webkitAudioContext)();
