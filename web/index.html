@@ -11,6 +11,11 @@
     <style>
         body { margin: 0; padding: 0; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+
+        #infoIcon, #helpIcon {
+                display: none; /* Hide these elements initially */
+        }
+
         #helpIcon {
             position: absolute;
             top: 45px;
@@ -183,18 +188,22 @@
         }
     });
 
-    // Function to enable all interactions
-    function enableAllInteractions() {
+    // Function to enable all interactions and show icons
+    function enableAllInteractionsAndShowIcons() {
         document.querySelectorAll('.disable-interaction').forEach(el => {
             el.classList.remove('disable-interaction');
         });
+        // Make the info and help icons visible
+        document.getElementById('infoIcon').style.display = 'block';
+        document.getElementById('helpIcon').style.display = 'block';
     }
 
-    // Add click event to the start button to enable interactions
+    // Add click event to the start button to enable interactions and show icons
     document.getElementById('start').addEventListener('click', function() {
-        enableAllInteractions();
+        enableAllInteractionsAndShowIcons();
     });
 });
+
 
 
     document.getElementById('helpIcon').addEventListener('click', function(event) {
