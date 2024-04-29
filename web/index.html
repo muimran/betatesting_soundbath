@@ -8,24 +8,31 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
     <script type="text/javascript" src="https://cdn.cycling74.com/rnbo/latest/rnbo.min.js"></script>
+    
+    
     <style>
+        /* Basic CSS reset for body */
         body { margin: 0; padding: 0; }
+        /* Full-screen map positioning */
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
 
+        /* Initially hide info and help icons */
         #infoIcon, #helpIcon {
-                display: none; /* Hide these elements initially */
+            display: none;
         }
 
+        /* Styling for help icon */
         #helpIcon {
             position: absolute;
             top: 45px;
             right: 30px;
-            width: 40px; /* Adjust to match your image size */
+            width: 40px;
             height: 40px;
             z-index: 100;
             cursor: pointer;
         }
 
+        /* Pseudo-element for help icon for visual effects */
         #helpIcon::after {
             content: '';
             position: absolute;
@@ -36,29 +43,29 @@
             background: linear-gradient(to bottom, transparent 50%, #e7e56c 50%);
             background-size: 100% 200%;
             transition: background-position 0.5s;
-            -webkit-mask-image: url('question-mark-mask.png'); /* Ensure this file exists and is correct */
+            -webkit-mask-image: url('question-mark-mask.png');
             mask-image: url('question-mark-mask.png');
             mask-size: cover;
-            pointer-events: none; /* Ignore mouse events on the pseudo-element */
+            pointer-events: none;
         }
 
+        /* Hover effect for help icon */
         #helpIcon:hover::after {
             background-position: 0 -100%;
         }
 
-
-
+        /* Styling for information icon */
         #infoIcon {
             position: absolute;
             top: 100px;
             right: 30px;
-            width: 40px; /* Adjust to match your image size */
+            width: 40px;
             height: 40px;
-            z-index: 100;
-            z-index: 97;
+            z-index: 96;
             cursor: pointer;
         }
 
+        /* Pseudo-element for info icon for visual effects */
         #infoIcon::after {
             content: '';
             position: absolute;
@@ -69,48 +76,43 @@
             background: linear-gradient(to bottom, transparent 50%, #e7e56c 50%);
             background-size: 100% 200%;
             transition: background-position 0.5s;
-            -webkit-mask-image: url('information_mask.png'); /* Ensure this file exists and is correct */
+            -webkit-mask-image: url('information_mask.png');
             mask-image: url('information_mask.png');
             mask-size: cover;
-            pointer-events: none; /* Ignore mouse events on the pseudo-element */
+            pointer-events: none;
         }
 
+        /* Hover effect for info icon */
         #infoIcon:hover::after {
             background-position: 0 -100%;
         }
 
+        /* Popup box styling, initially hidden */
         #popupBox {
-    display: none; /* Initially hidden */
-    position: absolute;
-    top: calc(30px + 7%);
-    right: 30px;
-    width: 225px;
-    height: auto; /* Adjust this if necessary */
-    max-height: 210px; /* Maximum height before scrolling starts */
-    overflow-y: auto; /* Allows vertical scrolling */
-    background: rgba(255, 255, 255, 1);
-    z-index: 99;
-    border: 1px solid #ccc;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    border-radius: 5px;
-}
-
-
-        #popupBox p {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    line-height: 1.6;
-    opacity: 1; /* Set initial opacity to visible */
-    transform: translateY(20px); /* Start without translation */
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-        #popupBox p.active {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all .5s ease-out;
+            display: none;
+            position: absolute;
+            top: calc(30px + 7%);
+            right: 30px;
+            width: 225px;
+            height: auto;
+            max-height: 180px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 1);
+            z-index: 99;
+            border: 1px solid #ccc;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border-radius: 5px;
         }
+ 
+        /* Paragraph styling within popup box */
+        #popupBox p {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        /* Hidden additional info area */
         #info {
             display: none;
             position: absolute;
@@ -125,53 +127,54 @@
             font-size: 0.8em;
             overflow-y: auto;
             height: 450px;
+            z-index: 97;
         }
- 
 
-            #start {
+        /* Start button styling */
+        #start {
             position: absolute;
-            top: 15%;  /* Keep it at 20% from the top */
-            left: 46%; /* Center horizontally in relation to the entire display */
-            width: 120px; /* Width of the button */
-            height: 120px; /* Height of the button */
+            top: 15%;
+            left: 46%;
+            width: 120px;
+            height: 120px;
             z-index: 100;
             cursor: pointer;
             animation: pulse 3s infinite;
-            transform: translateX(-50%); /* Shifts the button to the left by half its width */
+            transform: translateX(-50%);
         }
 
+        /* Keyframes for start button animation */
         @keyframes pulse {
             0%, 100% {
-                transform: scale(1); /* Start and end at normal size */
+                transform: scale(1);
             }
             50% {
-                transform: scale(0.8); /* Shrink to 90% size at halfway point */
+                transform: scale(0.8);
             }
         }
 
-       
-
+        /* Style to disable interaction and reduce opacity */
         .disable-interaction {
-                pointer-events: none;
-                opacity: 0.5; /* Optional: reduces opacity to indicate that the element is disabled */
+            pointer-events: none;
+            opacity: 0.5;
         }
 
-
-
     </style>
+
+
 </head>
 <body>
     <div id="helpIcon">
-        <img src="question.svg" alt="Help" style="width:100%; height:100%;"> <!-- Ensure this image path is correct -->
+        <img src="question.svg" alt="Help" style="width:100%; height:100%;">
     </div>
     <div id="infoIcon">
         <a href="about.html" target="_blank">
-            <img src="information.svg" alt="Info" style="width:100%; height:100%;"> <!-- Make sure this image path is correct -->
+            <img src="information.svg" alt="Info" style="width:100%; height:100%;">
         </a>
     </div>
     
     <div id="start">
-        <img src="start_button.svg" alt="Help" style="width:100%; height:100%;"> <!-- Ensure this image path is correct -->
+        <img src="start_button.svg" alt="Help" style="width:100%; height:100%;">
     </div>
 <div id="popupBox">
     <p><strong>Lorem Ipsam</strong><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
@@ -183,59 +186,44 @@
 
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
-    // Initially disable all interactions except for the start button
-    document.querySelectorAll('div, a').forEach(el => {
-        if (el.id !== 'start') { // Ignore the start button itself
-            el.classList.add('disable-interaction');
+        // Disable interactions except for the 'start' button initially
+        document.querySelectorAll('div, a').forEach(el => {
+            if (el.id !== 'start') {
+                el.classList.add('disable-interaction');
+            }
+        });
+    
+        // Function to enable interactions and show icons
+        function enableAllInteractionsAndShowIcons() {
+            document.querySelectorAll('.disable-interaction').forEach(el => {
+                el.classList.remove('disable-interaction');
+            });
+            document.getElementById('infoIcon').style.display = 'block';
+            document.getElementById('helpIcon').style.display = 'block';
         }
-    });
-
-    // Function to enable all interactions and show icons
-    function enableAllInteractionsAndShowIcons() {
-        document.querySelectorAll('.disable-interaction').forEach(el => {
-            el.classList.remove('disable-interaction');
+    
+        // Enable interactions and show icons on 'start' button click
+        document.getElementById('start').addEventListener('click', function() {
+            enableAllInteractionsAndShowIcons();
         });
-        // Make the info and help icons visible
-        document.getElementById('infoIcon').style.display = 'block';
-        document.getElementById('helpIcon').style.display = 'block';
-    }
-
-    // Add click event to the start button to enable interactions and show icons
-    document.getElementById('start').addEventListener('click', function() {
-        enableAllInteractionsAndShowIcons();
     });
-});
-
-
-
-document.getElementById('helpIcon').addEventListener('click', function(event) {
-    var popupBox = document.getElementById('popupBox');
-    if (popupBox.style.display === 'block') {
-        popupBox.style.display = 'none';
-        popupBox.querySelectorAll('p').forEach(p => p.classList.remove('active'));
-    } else {
-        popupBox.style.display = 'block';
-        popupBox.querySelectorAll('p').forEach(p => {
-            // Delay adding the class to trigger the transition effect
-            setTimeout(() => p.classList.add('active'), 10);
-        });
-    }
-    event.stopPropagation();
-});
-
-
-
+    
+    document.getElementById('helpIcon').addEventListener('click', function(event) {
+        var popupBox = document.getElementById('popupBox');
+        popupBox.style.display = (popupBox.style.display === 'block' ? 'none' : 'block');
+        event.stopPropagation();
+    });
+    
     document.getElementById('popupBox').addEventListener('click', function(event) {
         event.stopPropagation();
     });
-
+    
     document.addEventListener('click', function() {
         var popupBox = document.getElementById('popupBox');
         popupBox.style.display = 'none';
     });
-
-
 </script>
+
 <script type="text/javascript" src="script.js"></script>
 <script type="text...
 </html>
