@@ -144,6 +144,13 @@
 
        
 
+        .disable-interaction {
+    pointer-events: none;
+    opacity: 0.5; /* Optional: reduces opacity to indicate that the element is disabled */
+}
+
+
+
     </style>
 </head>
 <body>
@@ -169,24 +176,26 @@
 
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                } else {
-                    entry.target.classList.remove('active');
-                }
-            });
-        }, {
-            root: document.getElementById('popupBox'),
-            rootMargin: '50px 50px 50px 50px',
-            threshold: .9
-        });
-
-        document.querySelectorAll('#popupBox p').forEach(p => {
-            observer.observe(p);
-        });
+    // Initially disable all interactions except for the start button
+    document.querySelectorAll('div, a').forEach(el => {
+        if (el.id !== 'start') { // Ignore the start button itself
+            el.classList.add('disable-interaction');
+        }
     });
+
+    // Function to enable all interactions
+    function enableAllInteractions() {
+        document.querySelectorAll('.disable-interaction').forEach(el => {
+            el.classList.remove('disable-interaction');
+        });
+    }
+
+    // Add click event to the start button to enable interactions
+    document.getElementById('start').addEventListener('click', function() {
+        enableAllInteractions();
+    });
+});
+
 
     document.getElementById('helpIcon').addEventListener('click', function(event) {
             var popupBox = document.getElementById('popupBox');
