@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dynamic Content Layout Page</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&display=swap" as="style">
+
 <link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
@@ -25,47 +27,59 @@
         left: 290px;
         background: transparent;
         z-index: 2;
-        color: #e7e56c;
         font-family: 'Grandstander', sans-serif;
+        color: transparent; /* Make the color transparent initially for animation */
+    }
+    .header span {
+        -webkit-text-stroke: 1px #e7e56c;
+        color: transparent;
+        animation: text-animation 3s forwards;
+        animation-delay: calc(var(--animation-order) * 0.5s); /* Delay based on order */
+    }
+    @keyframes text-animation {
+        0%, 50% {
+            color: transparent;
+            -webkit-text-stroke-color: #e7e56c;
+        }
+        100% {
+            color: #e7e56c;
+            -webkit-text-stroke-color: transparent;
+        }
     }
     .main-container {
         display: grid;
         grid-template-columns: repeat(8, 1fr);
         grid-template-rows: auto 1fr;
-        margin-top: 180px; /* Adjusted top margin */
-        height: calc(100vh - 180px); /* Adjusted height */
+        margin-top: 180px;
+        height: calc(100vh - 180px);
     }
     .subheadings {
         grid-column: 4;
         grid-row: 1 / span 2;
         padding: 15px;
-        padding-top: 530px; /* Space for header */
+        padding-top: 530px;
         font-family: 'Grandstander', sans-serif;
-        font-weight: bold; /* Make the font bold */
+        font-weight: bold;
     }
     .subheading {
         cursor: pointer;
         font-size: 16px;
-        margin-bottom: 12px; /* Half line space */
+        margin-bottom: 12px;
     }
-
     .active-subheading {
-    color: #e7e56c; /* Example hex color: adjust as needed */
+        color: #e7e56c;
     }
-
     .content {
-        grid-column: 5 / span 2;  /* Change from span 3 to span 2 */
+        grid-column: 5 / span 2;
         grid-row: 2;
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         position: relative;
-        line-height: 1.5; 
+        line-height: 1.5;
         font-family: 'Grandstander', sans-serif;
     }
-
-
     .content-section {
         position: absolute;
         top: 0;
@@ -75,13 +89,10 @@
         opacity: 0;
         transition: opacity 0.5s linear;
     }
-
     .content-section.visible {
         visibility: visible;
         opacity: 1;
     }
-
-
     @media (max-width: 600px) {
         .subheadings, .content {
             grid-column: 1;
@@ -97,7 +108,7 @@
 </head>
 <body>
 
-    <div class="header" id="animatedHeader">ABOUT</div>
+<div class="header" id="animatedHeader">ABOUT</div>
 
 <div class="main-container">
     <div class="subheadings">
@@ -183,18 +194,26 @@ function showContent(sectionId) {
             if (section.id === sectionId) {
                 section.style.visibility = 'visible';
                 section.style.opacity = '1';
-                subheadings[index].classList.add('active-subheading'); // Highlight the active subheading
+                subheadings[index].classList.add('active-subheading');
             }
         });
-    }, 500); // This matches the CSS transition time
+    }, 500);
 }
 
-// Initialize the first content section to be visible on page load
 document.addEventListener('DOMContentLoaded', function() {
+    const header = document.getElementById('animatedHeader');
+    const text = header.innerText;
+    header.innerHTML = ""; // Clear the text
+
+    text.split('').forEach((char, index) => {
+        let span = document.createElement('span');
+        span.textContent = char;
+        span.style.setProperty('--animation-order', index);
+        header.appendChild(span);
+    });
+
     showContent('section1');
 });
-
-
 </script>
 </body>
 </html>
