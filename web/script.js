@@ -105,50 +105,68 @@ let geojsonData;
 
 
 
-function updateAverageRainfall() {
-        if (!geojsonData || !device) return;
-    
-        let bounds = map.getBounds(); // Retrieve the current geographic boundaries of the visible map area.
-        let visibleFeatures = geojsonData.features.filter(feature => {
-            let [lng, lat] = feature.geometry.coordinates;
-            return bounds.contains([lng, lat]);
-        });
-    
-        let totalRainfall = 0;
-        let stationsWithRainfall = 0;
-        let rainfallAndCountryCodes = '';
-    
-        // Calculate total rainfall and count stations with rainfall.
-        visibleFeatures.forEach(feature => {
-            let rainfall = parseFloat(feature.properties.rainfall);
-            let country_code = feature.properties.country_code;
-    
-            // Ensure rainfall and country code are defined and rainfall is greater than 0.
-            if (!isNaN(rainfall) && rainfall >= 0 && country_code !== undefined) {
-                stationsWithRainfall++;
-                totalRainfall += rainfall;
-                rainfallAndCountryCodes += `${rainfall} ${country_code} `;
-            }
-        });
-    
-        rainfallAndCountryCodes = rainfallAndCountryCodes.trim(); // Trim the final string.
-    
-        let averageRainfall = (visibleFeatures.length > 0) ? (totalRainfall / visibleFeatures.length).toFixed(2) : 'N/A';
-    
-        let rainfall = rainfallAndCountryCodes.split(/\s+/).map(s => parseFloat(s));
-    
-        // Send the message event to the RNBO device 
-        let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "Data", rainfall);
-        device.scheduleEvent(messageEvent);
-
-        // Update the HTML content.
-        document.getElementById('info').innerHTML = 'Average Rainfall: ' + averageRainfall + ' mm<br>' +
-                                                    'Total Rainfall: ' + totalRainfall.toFixed(2) + ' mm<br>' +
-                                                    'Total Stations: ' + visibleFeatures.length + '<br>' +
-                                                    'Stations with Rainfall > 0mm: ' + stationsWithRainfall + '<br>' +
-                                                    'Visible Rainfall & Country Codes: ' + rainfallAndCountryCodes;
+function mapRainfallLogarithmically(rainfall) {
+    if (rainfall > 2) {
+        return 7;
+    } else if (rainfall >= 0.01) {
+        const logBase = Math.log(2) - Math.log(0.01); // This is the scale factor
+        const adjustedLog = Math.log(rainfall) - Math.log(0.01);
+        return 7 * (adjustedLog / logBase);
+    } else {
+        return 0; // Assuming values below 0.01 should be treated as 0
+    }
 }
+
+
+function updateAverageRainfall() {
+    if (!geojsonData || !device) return;
+
+    let bounds = map.getBounds(); // Retrieve the current geographic boundaries of the visible map area.
+    let visibleFeatures = geojsonData.features.filter(feature => {
+        let [lng, lat] = feature.geometry.coordinates;
+        return bounds.contains([lng, lat]);
+    });
+
+    let totalRainfall = 0;
+    let stationsWithRainfall = 0;
+    let rainfallAndCountryCodes = '';
+
+    // Calculate total rainfall and count stations with rainfall.
+    visibleFeatures.forEach(feature => {
+        let rainfall = parseFloat(feature.properties.rainfall);
+        let country_code = feature.properties.country_code;
+        
+        // Apply the logarithmic mapping to the rainfall value
+        rainfall = mapRainfallLogarithmically(rainfall);
+
+        // Ensure country code is defined and rainfall is processed.
+        if (!isNaN(rainfall) && country_code !== undefined) {
+            stationsWithRainfall++;
+            totalRainfall += rainfall;
+            rainfallAndCountryCodes += `${rainfall} ${country_code} `;
+        }
+    });
+
+    rainfallAndCountryCodes = rainfallAndCountryCodes.trim(); // Trim the final string.
+
+    let averageRainfall = (visibleFeatures.length > 0) ? (totalRainfall / visibleFeatures.length).toFixed(2) : 'N/A';
+
+    let rainfall = rainfallAndCountryCodes.split(/\s+/).map(s => parseFloat(s));
+
+    // Send the message event to the RNBO device 
+    let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "Data", rainfall);
+    device.scheduleEvent(messageEvent);
     
+    console.log("Data sent to RNBO:", rainfall);
+
+    // Update the HTML content.
+    document.getElementById('info').innerHTML = 'Average Rainfall: ' + averageRainfall + ' mm<br>' +
+                                                'Total Rainfall: ' + totalRainfall.toFixed(2) + ' mm<br>' +
+                                                'Total Stations: ' + visibleFeatures.length + '<br>' +
+                                                'Stations with Rainfall > 0mm: ' + stationsWithRainfall + '<br>' +
+                                                'Visible Rainfall & Country Codes: ' + rainfallAndCountryCodes;
+}
+
 
 
 
@@ -156,7 +174,7 @@ function updateAverageRainfall() {
 // Event handler for the 'load' event of the map.
 map.on('load', () => {
     // Fetch GeoJSON data asynchronously from a URL.
-    fetch('https://raw.githubusercontent.com/annadowell/soundbath2/main/web/data/myData.geojson')
+    fetch("https://raw.githubusercontent.com/muimran/betatesting_soundbath/main/web/data/myData.geojson")
         .then(response => response.json()) // Parse the fetched data as JSON.
         .then(data => {
             geojsonData = data; // Store the parsed GeoJSON data.

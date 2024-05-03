@@ -43,8 +43,8 @@
             background: linear-gradient(to bottom, transparent 50%, #e7e56c 50%);
             background-size: 100% 200%;
             transition: background-position 0.5s;
-            -webkit-mask-image: url('question-mark-mask.png');
-            mask-image: url('question-mark-mask.png');
+            -webkit-mask-image: url('web/images/question-mark-mask.png');
+            mask-image: url('web/images/question-mark-mask.png');
             mask-size: cover;
             pointer-events: none;
         }
@@ -65,27 +65,6 @@
             cursor: pointer;
         }
 
-        /* Pseudo-element for info icon for visual effects */
-        #infoIcon::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent 50%, #e7e56c 50%);
-            background-size: 100% 200%;
-            transition: background-position 0.5s;
-            -webkit-mask-image: url('information_mask.png');
-            mask-image: url('information_mask.png');
-            mask-size: cover;
-            pointer-events: none;
-        }
-
-        /* Hover effect for info icon */
-        #infoIcon:hover::after {
-            background-position: 0 -100%;
-        }
 
         /* Popup box styling, initially hidden */
         #popupBox {
@@ -131,33 +110,38 @@
         }
 
         /* Start button styling */
-        #start {
-            position: absolute;
-            top: 15%;
-            left: 46%;
-            width: 120px;
-            height: 120px;
-            z-index: 100;
-            cursor: pointer;
-            animation: pulse 3s infinite;
-            transform: translateX(-50%);
-        }
+#start {
+    position: absolute;
+    top: 15%; /* Vertical positioning */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Offset to the left by half its width */
+    width: 120px;
+    height: 120px;
+    z-index: 100;
+    cursor: pointer;
+    animation: pulse 3s infinite;
+    transform-origin: center; /* Ensure transformations scale from the center */
+}
 
-        /* Keyframes for start button animation */
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(0.8);
-            }
-        }
+/* Keyframes for start button animation ensuring transform is included */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1) translateX(-52%);
+    }
+    50% {
+        transform: scale(0.8) translateX(-48%);
+    }
+}
 
-        /* Style to disable interaction and reduce opacity */
-        .disable-interaction {
-            pointer-events: none;
-            opacity: 0.5;
-        }
+/* Ensures media query reiterates necessary transforms for mobile */
+@media (max-width: 600px) {
+    #start {
+        top: 10%;
+        left: 48%; /* Horizontally center the button */
+        transform: translateX(-52%); /* Maintain horizontal centering */
+    }
+}
+
 
     </style>
 
@@ -165,16 +149,16 @@
 </head>
 <body>
     <div id="helpIcon">
-        <img src="question.svg" alt="Help" style="width:100%; height:100%;">
+        <img src="images/question.svg" alt="Help" style="width:100%; height:100%;">
     </div>
     <div id="infoIcon">
         <a href="about.html" target="_blank">
-            <img src="information.svg" alt="Info" style="width:100%; height:100%;">
+            <img src="images/information.svg" alt="Info" style="width:100%; height:100%;">
         </a>
     </div>
     
     <div id="start">
-        <img src="start_button.svg" alt="Help" style="width:100%; height:100%;">
+        <img src="images/start_button.svg" alt="Help" style="width:100%; height:100%;">
     </div>
 <div id="popupBox">
     <p><strong>Lorem Ipsam</strong><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
