@@ -196,7 +196,7 @@ for csv_row in csv_data:
     for index, feature in enumerate(geojson_data['features']):
         if coords_match(feature, csv_row):
             # Update both rainfall and country code properties in one line
-            feature['properties'].update({x
+            feature['properties'].update({
                 'rainfall': csv_row['rainfall_mm'],
                 'country_code': int(csv_row['country_code'])  # Convert to integer if necessary
             })
