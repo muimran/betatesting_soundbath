@@ -2,8 +2,8 @@ name: update-from-api
 
 on:
   schedule:
-   - cron: "*/15 * * * *"
- workflow_dispatch:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
 
 permissions:
   contents: write
