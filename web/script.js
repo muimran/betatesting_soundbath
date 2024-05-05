@@ -153,6 +153,12 @@ function updateAverageRainfall() {
 
     let rainfall = rainfallAndCountryCodes.split(/\s+/).map(s => parseFloat(s));
 
+
+        // If no stations are visible, send the specified string instead of NaN
+    if (visibleFeatures.length === 0) {
+        rainfall = [0, 1, 0, 2, 0, 3];
+    }
+    
     // Send the message event to the RNBO device 
     let messageEvent = new RNBO.MessageEvent(RNBO.TimeNow, "Data", rainfall);
     device.scheduleEvent(messageEvent);
