@@ -306,4 +306,3 @@ map.on('load', () => {
     // Bind an event handler to update average rainfall whenever the map stops moving.
     map.on('moveend', updateAverageRainfall);
 });
-
