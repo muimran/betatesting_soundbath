@@ -3,170 +3,196 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dynamic Content Layout Page</title>
+<title>Soundbath Info</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;  /* Ensures the page fits the viewport height */
-        width: 100%;  /* Ensures the page fits the viewport width */
-        overflow-x: hidden;  /* Prevent horizontal overflow */
-        background-color: black;
-        color: rgb(227, 222, 222);
-        font-family: Arial, sans-serif;
-    }
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;  
+    width: 100%;  
+    overflow-x: hidden;  
+    background-color: black;
+    color: rgb(227, 222, 222);
+    font-family: 'Roboto', sans-serif;
+}
 
-    *, *:before, *:after {
-        box-sizing: border-box;  /* Includes padding and border in width and height */
-    }
+*, *:before, *:after {
+    box-sizing: border-box;  
+}
 
+.header {
+    padding: 20px 20px;
+    position: relative;
+    top: 0;  
+    left: 0;
+    width: 100%;  
+    z-index: 3;
+    background-color: black;
+}
+
+.burger-icon {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 4;
+}
+
+.burger-icon div {
+    width: 30px;
+    height: 3px;
+    background-color: #e7e56c;
+    margin: 5px 0;
+}
+
+.subheadings {
+    text-align: left;
+    padding: 80px 20px;
+    position: fixed;
+    width: 100%;
+    top: 115px;
+    left: 290px;
+    background: transparent;
+    z-index: 2;
+    color: #e7e56c;
+    font-family: 'Futura', sans-serif;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: auto 1fr;
+    margin-top: 180px; 
+    height: calc(100vh - 180px); 
+}
+
+.subheadings .subheading {
+    cursor: pointer;
+    font-size: 20px;
+    color: white;
+}
+
+.subheadings .active-subheading {
+    color: #e7e56c;
+}
+
+.content {
+    grid-column: 4 / span 3;
+    grid-row: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    line-height: 1.5;
+    font-family: 'Futura', sans-serif;
+}
+
+.content-section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+
+.content-section.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+@media (max-width: 600px) {
     .header {
-        text-align: left;
-        font-size: 2em;
-        padding: 80px 20px;
-        position: fixed;
-        width: 100%;
-        top: 115px;  /* Maintained original position */
-        left: 290px;  /* Maintained original positioning */
-        background: transparent;
-        z-index: 2;
-        color: #e7e56c;
-        font-family: 'Grandstander', sans-serif;
+        padding: 20px 20px;
+        position: relative; 
+        top: 0;  
+        left: 0;
+        width: 100%;  
+    }
+    .burger-icon {
+        display: flex;
     }
     .main-container {
         display: grid;
-        grid-template-columns: repeat(8, 1fr);
-        grid-template-rows: auto 1fr;
-        margin-top: 180px; /* Adjusted top margin */
-        height: calc(100vh - 180px); /* Adjusted height to fit viewport */
+        grid-template-columns: 1fr;  
+        grid-template-rows: auto auto;  
+        margin-top: 60px;  
+        height: auto;  
     }
     .subheadings {
-        grid-column: 4;
-        grid-row: 1 / span 2;
-        padding: 15px;
-        padding-top: 530px; /* Space for header */
-        font-family: 'Grandstander', sans-serif;
-        font-weight: bold;
+        display: none;
     }
-    .subheading {
+    .mobile-menu {
+        display: flex;
+        flex-direction: column;
+        padding: 15px 20px;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: black;
+        z-index: 3;
+    }
+    .mobile-menu .subheading {
+        padding: 10px 0;
         cursor: pointer;
-        font-size: 16px;
-        margin-bottom: 12px;
+        font-size: 20px;
+        color: white;
     }
-    .active-subheading {
+    .mobile-menu .active-subheading {
         color: #e7e56c;
     }
     .content {
-        grid-column: 5 / span 2;
-        grid-row: 2;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        position: relative;
-        line-height: 1.5;
-        font-family: 'Grandstander', sans-serif;
+        grid-row: 2;  
+        display: block;  
     }
-    .content-section {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        visibility: hidden;
-        opacity: 0;
-        transition: opacity 0.5s linear;
-    }
-    .content-section.visible {
-        visibility: visible;
-        opacity: 1;
-    }
-    @media (max-width: 600px) {
-        .header {
-            padding: 20px 20px;
-            position: relative;  /* Reverted to fixed to keep the header in view */
-            top: 0;  /* Reset position for better viewability */
-            left: 0;
-            width: 100%;  /* Full width to align correctly on mobile */
-        }
-        .main-container {
-            display: grid;
-            grid-template-columns: 1fr;  /* Single column layout */
-            grid-template-rows: auto auto;  /* Two rows: one for subheadings, one for content */
-            margin-top: 60px;  /* Reduced top margin */
-            height: auto;  /* Auto height to fit content */
-        }
-        .subheadings, .content {
-            grid-column: 1;  /* Full width */
-            padding: 15px 20px;  /* Slightly padded for edge space */
-        }
-        .subheadings {
-            grid-row: 1;  /* Subheadings remain at the top */
-        }
-        .content {
-            grid-row: 2;  /* Content remains below subheadings */
-            display: block;  /* Block layout for simplicity */
-        }
-    }
+}
+
 </style>
 </head>
 <body>
-    <div class="header" id="animatedHeader">ABOUT</div>
+    <div class="header">
+        <div class="burger-icon" onclick="toggleMobileMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="subheading" onclick="showContent('section1')">About Soundbath</div>
+        <div class="subheading" onclick="showContent('section3')">Creators</div>
+    </div>
     <div class="main-container">
         <div class="subheadings">
             <div class="subheading" onclick="showContent('section1')">About Soundbath</div>
-            <div class="subheading" onclick="showContent('section2')">Background</div>
             <div class="subheading" onclick="showContent('section3')">Creators</div>
         </div>
         <div class="content">
             <div id="section1" class="content-section">
-                <p>TEXT 1: We then made a list of things we’d like to have in the project, and discussed what for each of us made something a ‘good’ project. 
-                    We wanted a hook, either something absurd that anchored a larger news story, or something novel in terms of format.</p>
-                     
-                    <p></p>We were all keen on using data to tell stories that had a human impact in some way. Interestingly, we were more set on project format, 
-                    identifying the specific skills that we wanted to develop over the next 12 weeks, than a specific area of research. 
-                    Primarily focusing on this story offered a unique opportunity to collect data where none currently exists, 
-                    with potential to unearth a story that no one else could cover due to a complete lack of data. We knew there would 
-                    be collection challenges, so we immediately set up interviews and meetings to gauge participation interest should we move forward with this proposal.</p>
-    
-                    <p></p>That weekend, we met with climate activists from the Cardiff chapter of Extinction Rebellion, 
-                    who were very keen on collecting this overlooked data. Some members did raise concerns about data protection and privacy, 
-                    which we would need to address to move forward. We understood that we would likely not get participants to submit arrest 
-                    data if we could not assure them it would be secure. This highlighted ethical concerns we would need to discuss with our advisors. 
-                </p>
-            </div>
-            <div id="section2" class="content-section">
-                <p>TEXT 2: We then made a list of things we’d like to have in the project, and discussed what for each of us made something a ‘good’ project. 
-                    We wanted a hook, either something absurd that anchored a larger news story, or something novel in terms of format. 
-                    We were all keen on using data to tell stories that had a human impact in some way. Interestingly, we were more set on project format, 
-                    identifying the specific skills that we wanted to develop over the next 12 weeks, than a specific area of research. </p>
-                    
-                <p> Primarily focusing on this story offered a unique opportunity to collect data where none currently exists, 
-                    with potential to unearth a story that no one else could cover due to a complete lack of data. We knew there would 
-                    be collection challenges, so we immediately set up interviews and meetings to gauge participation interest should we move forward with this proposal.
-                    That weekend, we met with climate activists from the Cardiff chapter of Extinction Rebellion, 
-                    who were very keen on collecting this overlooked data. Some members did raise concerns about data protection and privacy, 
-                    which we would need to address to move forward. We understood that we would likely not get participants to submit arrest 
-                    data if we could not assure them it would be secure. This highlighted ethical concerns we would need to discuss with our advisors. </p>
+                <p>We think standard rain maps are boring and, to be blunt, a little ugly. </p>
+                <p>Not only that, but typical weather visualisations overlook a key feature of rain: sound.</p>
+                <p>From ominous thunder to pleasant pitter-patter, the auditory experience of rainfall just isn’t captured by standard meteorology reporting. </p>
+                <p>That’s why we developed Soundbath Britain, an interactive map that plays a custom song generated from near real-time rainfall data from across England, Scotland and Wales. </p>
+                <p>It uses rain measurements from gauges across Britain, through an interface from Natural Resources Wales. </p>
+                <p>Liam Perrot, from NRW’s Hydrometry and Telemetry team, said the data has been used by the public in many different ways since its launch, but this is the first time he’s heard of it being used to make music. </p>
+                <p>“We've got a lot of data and it just seems right to make that available to the public to use it as they see fit,” Perrot said. “The more people that are using it the better.”</p>
+                <p>“When you use sound, you're creating an experience of the data," said music theory expert Miriam Quick, co-founder of data sonification studio Loud Numbers. “You become immersed in a story or an emotional experience.”</p>
+                <p>Her collaborator Duncan Geere has a background in meteorology and environmental science: “You can use [sound] to take people out of where they are and into an entirely different environment.” </p>
+                <p>“Rainy days have this whole atmosphere. You want to have a nice cup of tea and be under a blanket”, he said. “It's quite a calming and nice thing to be in. But then a storm is completely the opposite.”</p>
+                <p>Despite its inevitability, British rain is “a constant novelty,” said Cardiff-based neuroscientist and author Dean Burnett. </p>
+                <p>An expert on the science of emotion, including emotions evoked by sound, Burnett said our rain is an ever-present background noise, playing out as low-level stress and conversation fodder. </p>
+                <p>“Our weather is on shuffle, essentially. You've got familiar tracks, but what order they’re played in is anyone's guess.” </p>
+                <p></p>
+                <p>Produced by Anna Dowell, Muhammad Imran and Lauren Scott, Cardiff University</p>
+                <p>Musical composition and sound design by Finn Heathfield, Royal Welsh College of Music and Drama</p>
             </div>
             <div id="section3" class="content-section">
-                <p>TEXT 3: We then made a list of things we’d like to have in the project, and discussed what for each of us made something a ‘good’ project. </p>
-    
-                <p>We wanted a hook, either something absurd that anchored a larger news story, or something novel in terms of format. 
-                    We were all keen on using data to tell stories that had a human impact in some way. Interestingly, we were more set on project format, 
-                    identifying the specific skills that we wanted to develop over the next 12 weeks, than a specific area of research. </p>
-    
-                <p>Primarily focusing on this story offered a unique opportunity to collect data where none currently exists, 
-                    with potential to unearth a story that no one else could cover due to a complete lack of data. We knew there would 
-                    be collection challenges, so we immediately set up interviews and meetings to gauge participation interest should we move forward with this proposal.
-                    That weekend, we met with climate activists from the Cardiff chapter of Extinction Rebellion, 
-                    who were very keen on collecting this overlooked data. </p>
-                    
-                <p>Some members did raise concerns about data protection and privacy, 
-                    which we would need to address to move forward. We understood that we would likely not get participants to submit arrest 
-                    data if we could not assure them it would be secure. This highlighted ethical concerns we would need to discuss with our advisors.</p>
+                <p>Anna Dowell is a British journalist with bylines in the Times and student publications The Cardiffian, the Isis magazine, and Cherwell. She recently graduated from an English degree at Oxford, and is studying the Computational and Data Journalism MSc programme at Cardiff University supported by the Stationers’ Company bursary. </p>
+                <p>Muhammad Imran is a Bangladeshi journalist and researcher. He is pursuing an MSc in Computational and Data Journalism at Cardiff University with a Chevening Scholarship from the UK Foreign, Commonwealth and Development Office. </p>
+                <p>Lauren Scott is a Canadian journalist with bylines in CBC, The Toronto Star, The Hamilton Spectator, The Cambridge Times, rabble.ca, The Leveller and more. They are a student in the Computational and Data Journalism MSc programme at Cardiff University.</p>
             </div>
         </div>
     </div>
@@ -195,7 +221,26 @@
                 }
             });
         }, 500);
+
+        // Scroll main container to 180px from top
+        window.scrollTo({
+            top: 180,
+            behavior: 'smooth'
+        });
+
+        // Hide mobile menu on selection
+        document.getElementById('mobileMenu').style.display = 'none';
     }
+
+    function toggleMobileMenu() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenu.style.display === 'none' || mobileMenu.style.display === '') {
+            mobileMenu.style.display = 'flex';
+        } else {
+            mobileMenu.style.display = 'none';
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         showContent('section1');
     });
