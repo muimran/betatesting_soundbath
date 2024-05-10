@@ -163,7 +163,10 @@ function updateAverageRainfall() {
     device.scheduleEvent(messageEvent);
 
     console.log("Data sent to RNBO:", rainfall);
-
+    
+    // Log only the data that is currently being visualized.
+    console.log("Currently visualized data:", visibleFeatures);
+    
     // Update the HTML content.
     document.getElementById('info').innerHTML = 'Average Rainfall: ' + averageRainfall + ' mm<br>' +
                                                 'Total Rainfall: ' + totalRainfall.toFixed(2) + ' mm<br>' +
