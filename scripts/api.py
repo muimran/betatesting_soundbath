@@ -208,8 +208,8 @@ for csv_row in csv_data:
     geojson_data["features"].append(feature)
 
 # Save the GeoJSON data to a new file
-new_geojson_file_path = 'myData.geojson'
-with open(new_geojson_file_path, 'w') as new_geojson_file:
+geojson_file_path = '../web/data/myData.geojson'
+with open(geojson_file_path, 'w') as new_geojson_file:
     json.dump(geojson_data, new_geojson_file, indent=4)
 
-print(f"New GeoJSON file '{new_geojson_file_path}' created with data from the CSV.")
+print(f"New GeoJSON file '{geojson_file_path}' created with data from the CSV.")
