@@ -303,8 +303,9 @@ map.on('load', () => {
                       [15, 1]
                     ]
                   }
-              }
-          });
+              },
+                'filter': ['>', ['to-number', ['get', 'rainfall'], 0], 0] // Filter out zero rainfall values
+            });
 
             // Initialize and update the average rainfall calculation.
             updateAverageRainfall();
