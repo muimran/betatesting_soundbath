@@ -259,32 +259,25 @@ map.on('load', () => {
                 }
             });
 
-            // Define a circle layer to represent individual points of rainfall data visually.
+    // Define a circle layer to represent individual points of rainfall data visually.
             map.addLayer({
-              'id': 'rainfall-point',
-              'type': 'circle',
-              'source': 'rainfall-data',
-              'minzoom': 12,
-              'paint': {
-                  'circle-radius': {
-                    property: 'rainfall',
-                    type: 'exponential',
-                    stops: [
-                        [{ zoom: 12, value: 0.25 }, 5],
-                        [{ zoom: 13, value: 0.5 }, 10],
-                        [{ zoom: 14, value: 0.75 }, 15],
-                        [{ zoom: 15, value: 1 }, 20]
-                    ]
-                  },
-                  'circle-color': [
-                    // property: 'rainfall',
-                    // type: 'exponential',
-                    // stops: [
-                    //     [0, 'rgba(33,102,172,0)'],
-                    //     // [0.5, 'rgb(103,169,207)'],
-                    //     // [1, 'rgb(178,24,43)']
-                    // ]
-                    'interpolate',
+                'id': 'rainfall-point',
+                'type': 'circle',
+                'source': 'rainfall-data',
+                'minzoom': 12,
+                'paint': {
+                    'circle-radius': {
+                        property: 'rainfall',
+                        type: 'exponential',
+                        stops: [
+                            [{ zoom: 12, value: 0.25 }, 5],
+                            [{ zoom: 13, value: 0.5 }, 10],
+                            [{ zoom: 14, value: 0.75 }, 15],
+                            [{ zoom: 15, value: 1 }, 20]
+                        ]
+                    },
+                    'circle-color': [
+                        'interpolate',
                         ['linear'],
                         ['heatmap-density'],
                         0,
@@ -297,15 +290,16 @@ map.on('load', () => {
                         'rgba(92, 56, 214, 0.8)',
                         0.8,
                         'rgba(48, 0, 208, 0.8)'
-                  ],
-                  'circle-stroke-color': 'white',
-                  'circle-stroke-width': 1,
-                  'circle-opacity': {
-                    stops: [
-                      [14, 0],
-                      [15, 1]
-                    ]
-                  }
+                    ],
+                    'circle-stroke-color': 'white',
+                    'circle-stroke-width': 1,
+                    'circle-opacity': {
+                        stops: [
+                            [14, 0],
+                            [15, 1]
+                        ]
+                    }
+                },
                 'filter': [
                     'all',
                     ['>', ['to-number', ['get', 'rainfall'], 0], 0], // Filter out zero rainfall values
