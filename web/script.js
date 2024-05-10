@@ -308,6 +308,7 @@ map.on('load', () => {
                   }
               },
                 'filter': ['>', ['to-number', ['get', 'rainfall'], 0], 0] // Filter out zero rainfall values
+                 ['has', 'country_code']
             });
 
             // Initialize and update the average rainfall calculation.
