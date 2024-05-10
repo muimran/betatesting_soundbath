@@ -149,8 +149,11 @@ function updateAverageRainfall() {
 
     let averageRainfall = (visibleFeatures.length > 0) ? (totalRainfall / visibleFeatures.length).toFixed(2) : 'N/A';
 
-    // Prepare the rainfall data as an array of floats.
-    let rainfall = rainfallAndCountryCodes.split(/\s+/).map(s => parseFloat(s));
+    // Prepare the rainfall data as an array of floats, filtering out any NaN values.
+    let rainfall = rainfallAndCountryCodes
+        .split(/\s+/)
+        .map(s => parseFloat(s))
+        .filter(value => !isNaN(value));
 
     // Append the specific array `[0, 1, 0, 2, 0, 3]` to the rainfall data.
     rainfall.push(0, 1, 0, 2, 0, 3);
@@ -168,6 +171,7 @@ function updateAverageRainfall() {
                                                 'Stations with Rainfall > 0mm: ' + stationsWithRainfall + '<br>' +
                                                 'Visible Rainfall & Country Codes: ' + rainfallAndCountryCodes;
 }
+
 
 
 
