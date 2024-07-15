@@ -278,7 +278,7 @@ E13980,0.0,51.218761,-1.473747,England,Hampshire,0.07,0.07,1
 2321SO,0.0,50.83729,-0.377415,England,West Sussex,0.07,0.04,1
 3185,0.0,52.407451,-1.784594,England,Metropolitan Borough of Solihull,0.07,0,1
 E2510,0.0,52.535424,-0.981957,England,Leicestershire,0.07,0,1
-23839,0.0,54.829815,-1.807716,England,County Durham,0.07,0.05,1
+23839,0.2,54.829815,-1.807716,England,County Durham,0.07,0.05,1
 3774,0.0,53.579885,-0.869434,England,North Lincolnshire,0.07,0,1
 E23535,,51.747187,0.62561,England,Essex,0.07,0,1
 239258TP,0.0,51.664377,0.040933,England,Essex,0.07,0,1
@@ -714,7 +714,7 @@ E21335,0.0,52.132397,-0.953181,England,West Northamptonshire,0.07,0.02,1
 E23420,0.0,52.77483,1.151185,England,Norfolk,0.07,0,1
 43105,0.0,51.358394,-1.927417,England,Wiltshire,0.07,0.04,1
 50194,0.0,51.024089,-4.236452,England,Devon,0.07,0.14,1
-17651,0.2,55.000299,-1.68497,England,Newcastle upon Tyne,0.07,0,1
+17651,0.0,55.000299,-1.68497,England,Newcastle upon Tyne,0.07,0,1
 47108,0.0,50.586706,-4.106872,England,Devon,0.07,0.14,1
 1813,0.0,51.749956,-2.336734,England,Gloucestershire,0.07,0.1,1
 284703TP,0.0,51.178085,-0.133707,England,Surrey,0.07,0,1
@@ -752,7 +752,7 @@ E1976,0.0,52.615107,-0.675844,England,Rutland,0.07,0,1
 3779,0.0,53.591168,-0.7392,England,North Lincolnshire,0.07,0,1
 E43545,0.0,53.2518,-0.151126,England,Lincolnshire,0.07,0,1
 E5731,0.1,52.226854,-0.464875,England,Bedford,0.07,0,1
-35103,0.2,54.541989,-0.815179,England,North Yorkshire,0.07,0.06,1
+35103,0.0,54.541989,-0.815179,England,North Yorkshire,0.07,0.06,1
 E5170,0.0,51.117863,1.194265,England,Kent,0.07,0.01,1
 1040,0.0,52.309441,-1.774803,England,Warwickshire,0.07,0.13,1
 574656,,53.833251,-2.102519,England,Lancashire,0.07,0.08,1
