@@ -576,7 +576,7 @@ E13590,0.0,50.953747,-1.533691,England,Hampshire,0.07,0.07,1
 39163,0.0,54.100377,-0.208409,England,East Riding of Yorkshire,0.07,0,1
 E22218,0.0,52.295794,-0.512351,England,Bedford,0.07,0,1
 E7160,0.0,52.649303,-0.762024,England,Rutland,0.07,0,1
-E10140,0.2,51.023941,-0.551999,England,West Sussex,0.07,0.04,1
+E10140,0.0,51.023941,-0.551999,England,West Sussex,0.07,0.04,1
 593321,,54.605133,-3.160254,England,Cumberland,0.07,0.07,1
 34459,,54.518191,-0.964175,England,Redcar and Cleveland,0.07,0,1
 45115,0.0,50.601997,-3.530985,England,Devon,0.07,0.14,1
@@ -787,7 +787,7 @@ E5723,0.0,53.093909,-0.172837,England,Lincolnshire,0.07,0,1
 E1606,0.0,52.930882,-0.4014,England,Lincolnshire,0.07,0,1
 34091,0.0,54.596104,-1.039588,England,Redcar and Cleveland,0.07,0,1
 575335,,53.862447,-2.348914,England,Lancashire,0.07,0.08,1
-575335,0.1,53.862447,-2.348914,England,Lancashire,0.07,0.08,1
+575335,0.0,53.862447,-2.348914,England,Lancashire,0.07,0.08,1
 605382,,54.680261,-2.999541,England,Westmorland and Furness,0.07,0.16,1
 E1716,0.0,52.434206,-0.92251,England,West Northamptonshire,0.07,0.02,1
 40492,0.0,53.6913,-0.031959,England,East Riding of Yorkshire,0.07,0,1
@@ -988,7 +988,7 @@ E82120,0.0,51.116609,-3.940857,England,Devon,0.07,0.14,1
 574786______________________________________,,53.823309,-2.154144,England,Lancashire,0.07,0.08,1
 15313,0.0,55.010561,-2.08518,England,Northumberland,0.07,0,1
 NelsonGC,0.0,53.820527,-2.210336,England,Lancashire,0.07,0.08,1
-575092,0.0,53.742978,-2.323663,England,Lancashire,0.07,0.08,1
+575092,0.1,53.742978,-2.323663,England,Lancashire,0.07,0.08,1
 E82920,0.0,50.598409,-3.460219,England,Devon,0.07,0.14,1
 E82960,0.0,50.475407,-3.581856,England,Torbay,0.07,0.45,1
 1775,0.0,52.27751,-1.599081,England,Warwickshire,0.07,0.13,1
