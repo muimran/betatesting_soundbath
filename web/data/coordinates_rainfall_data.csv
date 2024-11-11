@@ -960,7 +960,7 @@ Coldw1,,53.823309,-2.154144,England,Lancashire,0.07,0.08,1
 Mitch1,,53.742978,-2.323663,England,Lancashire,0.07,0.08,1
 Edgeh1,,53.560463,-2.873303,England,Lancashire,0.07,0.08,1
 582191,0.0,54.144383,-2.433946,England,North Yorkshire,0.07,0.06,1
-579623,0.2,54.01325,-2.77441,England,Lancashire,0.07,0.08,1
+579623,0.0,54.01325,-2.77441,England,Lancashire,0.07,0.08,1
 EdgeH1,0.0,53.560463,-2.873303,England,Lancashire,0.07,0.08,1
 45268,0.0,50.701123,-3.117886,England,Devon,0.07,0.14,1
 Dubbs1,,54.406987,-2.892739,England,Westmorland and Furness,0.07,0.16,1
@@ -1283,7 +1283,7 @@ E71440,0.0,51.277138,-1.712499,England,Wiltshire,0.07,0.04,1
 323188,0.0,54.99473579,-3.568993615,Scotland,Dumfries and Galloway,0.08,0.3,2
 234327,0.0,57.0717185,-3.998638147,Scotland,Highland,0.08,0.08,2
 115247,0.0,57.39918687,-3.44381882,Scotland,Highland,0.08,0.08,2
-506152,0.05,55.24281443,-2.964073002,Scotland,Dumfries and Galloway,0.08,0.3,2
+506152,0.0,55.24281443,-2.964073002,Scotland,Dumfries and Galloway,0.08,0.3,2
 116007,0.0,56.39271229,-4.463706898,Scotland,Stirling,0.08,0,2
 115406,0.0,57.59399199,-4.374371661,Scotland,Highland,0.08,0.08,2
 234331,0.0,57.58239454,-3.608335401,Scotland,Moray,0.08,0,2
