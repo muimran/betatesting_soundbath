@@ -125,7 +125,7 @@ E15510,0.0,51.307175,0.102521,England,Kent,0.07,0.01,1
 598928,0.0,54.524262,-2.505948,England,Westmorland and Furness,0.07,0.16,1
 43200,0.0,51.044768,-2.4129,England,Somerset,0.07,0.05,1
 1712,0.0,52.639137,-2.325793,England,Shropshire,0.07,0.16,1
-287283TP,0.1,51.449283,-0.224851,England,London Borough of Wandsworth,0.07,0,1
+287283TP,0.0,51.449283,-0.224851,England,London Borough of Wandsworth,0.07,0,1
 3782,0.0,52.736673,-1.993285,England,Staffordshire,0.07,0.14,1
 3588,0.0,52.958861,-1.577925,England,Derbyshire,0.07,0.07,1
 551440,,53.276556,-2.854006,England,Cheshire West and Chester,0.07,0.1,1
@@ -601,7 +601,7 @@ E13580,0.0,51.103128,-1.562184,England,Hampshire,0.07,0.07,1
 289102TP,0.0,51.476541,-0.017866,England,Royal Borough of Greenwich,0.07,0,1
 E1691,,51.100206,0.007416,England,East Sussex,0.07,0,1
 32822,0.0,54.633845,-1.480219,England,County Durham,0.07,0.05,1
-613467,0.1,55.005582,-2.999799,England,Cumberland,0.07,0.07,1
+613467,0.0,55.005582,-2.999799,England,Cumberland,0.07,0.07,1
 E1645,0.0,53.664551,-0.343494,England,North Lincolnshire,0.07,0,1
 E7130,0.0,53.534467,-0.499466,England,North Lincolnshire,0.07,0,1
 3603,0.0,53.079174,-0.867665,England,Nottinghamshire,0.07,0,1
@@ -1055,7 +1055,7 @@ E71440,0.0,51.277138,-1.712499,England,Wiltshire,0.07,0.04,1
 320371,0.0,58.16554218,-6.740713858,Scotland,Western Isles,0.08,0,2
 115516,0.0,55.52935031,-4.326283061,Scotland,East Ayrshire,0.08,0.11,2
 115203,0.0,57.61017023,-3.222796593,Scotland,Moray,0.08,0,2
-533744,0.0,55.59164323,-2.798878774,Scotland,Scottish Borders,0.08,0,2
+533744,0.05,55.59164323,-2.798878774,Scotland,Scottish Borders,0.08,0,2
 115518,0.0,55.20254702,-3.320073284,Scotland,Dumfries and Galloway,0.08,0.3,2
 101227,0.0,55.44068058,-4.49863386,Scotland,South Ayrshire,0.08,0.88,2
 15161,0.0,56.28192154,-3.904225732,Scotland,Perth and Kinross,0.08,0,2
@@ -1300,7 +1300,7 @@ E71440,0.0,51.277138,-1.712499,England,Wiltshire,0.07,0.04,1
 1004,0.0,53.168868,-3.5703166,Wales,Conwy,0.41,0.08,3
 1005,0.0,53.264584,-3.451024,Wales,Denbighshire,0.41,0.35,3
 1006,0.0,53.139911,-3.8020403,Wales,Conwy,0.41,0.08,3
-1007,0.6,52.994328,-3.7735611,Wales,Conwy,0.41,0.08,3
+1007,0.0,52.994328,-3.7735611,Wales,Conwy,0.41,0.08,3
 1008,0.0,53.025858,-2.9535249,Wales,Wrexham,0.41,0.4,3
 1009,0.0,53.103689,-3.0905588,Wales,Flintshire,0.41,0.7,3
 1010,0.0,53.149188,-3.1968299,Wales,Denbighshire,0.41,0.35,3
