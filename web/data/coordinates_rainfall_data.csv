@@ -175,7 +175,7 @@ E7780,0.0,50.80213,0.081187,England,East Sussex,0.07,0,1
 43104,0.0,51.220377,-1.669896,England,Wiltshire,0.07,0.04,1
 248332TP,0.0,51.672207,-1.952948,England,Gloucestershire,0.07,0.1,1
 3816,0.0,53.130665,-1.23847,England,Nottinghamshire,0.07,0,1
-31555,0.4,54.469846,-1.099639,England,North Yorkshire,0.07,0.06,1
+31555,0.2,54.469846,-1.099639,England,North Yorkshire,0.07,0.06,1
 E1320,0.0,51.202399,0.077705,England,Kent,0.07,0.01,1
 46100,0.0,50.390977,-3.70144,England,Devon,0.07,0.14,1
 3686,0.0,52.544833,-1.031877,England,Leicestershire,0.07,0,1
@@ -679,7 +679,7 @@ E44091,0.0,51.964319,0.607714,England,Essex,0.07,0,1
 E21589,0.0,52.080162,1.29614,England,Suffolk,0.07,0,1
 79621,0.0,53.698015,-1.667505,England,Kirklees,0.07,0.03,1
 3683,0.0,52.697431,-1.117291,England,Leicestershire,0.07,0,1
-28502,0.2,54.504568,-2.141258,England,County Durham,0.07,0.05,1
+28502,0.0,54.504568,-2.141258,England,County Durham,0.07,0.05,1
 3026,0.0,52.79928,-2.275079,England,Staffordshire,0.07,0.14,1
 52223,0.0,51.393485,-2.917648,England,North Somerset,0.07,0,1
 E24775,,52.40222,1.542157,England,Suffolk,0.07,0,1
@@ -731,7 +731,7 @@ E1928,,53.135319,-0.008131,England,Lincolnshire,0.07,0,1
 253340TP,0.0,51.878717,-1.737736,England,Gloucestershire,0.07,0.1,1
 585022,,54.440718,-2.825629,England,Westmorland and Furness,0.07,0.16,1
 256345TP,0.0,52.168732,-1.235988,England,West Northamptonshire,0.07,0.02,1
-26090,0.0,54.760776,-1.340287,England,County Durham,0.07,0.05,1
+26090,0.2,54.760776,-1.340287,England,County Durham,0.07,0.05,1
 3178,0.0,52.999107,-1.06794,England,Nottinghamshire,0.07,0,1
 53532,,54.318976,-1.637925,England,North Yorkshire,0.07,0.06,1
 E8480,0.0,50.991504,0.152348,England,East Sussex,0.07,0,1
@@ -749,7 +749,7 @@ E24585,,52.164986,-0.703865,England,City of Milton Keynes,0.07,0,1
 E14420,0.0,50.824355,-1.559116,England,Hampshire,0.07,0.07,1
 E1976,0.0,52.615107,-0.675844,England,Rutland,0.07,0,1
 43201,0.0,51.085428,-2.353299,England,Somerset,0.07,0.05,1
-3779,0.2,53.591168,-0.7392,England,North Lincolnshire,0.07,0,1
+3779,0.0,53.591168,-0.7392,England,North Lincolnshire,0.07,0,1
 E43545,0.0,53.2518,-0.151126,England,Lincolnshire,0.07,0,1
 E5731,0.0,52.226854,-0.464875,England,Bedford,0.07,0,1
 35103,0.0,54.541989,-0.815179,England,North Yorkshire,0.07,0.06,1
@@ -807,7 +807,7 @@ E24940,0.0,51.835947,0.597384,England,Essex,0.07,0,1
 51126,0.0,51.124753,-3.200962,England,Somerset,0.07,0.05,1
 E1980,0.0,52.24053,-1.091234,England,West Northamptonshire,0.07,0.02,1
 E5722,0.1,53.031102,-0.503575,England,Lincolnshire,0.07,0,1
-E9660,0.0,50.929364,-0.469557,England,West Sussex,0.07,0.04,1
+E9660,0.1,50.929364,-0.469557,England,West Sussex,0.07,0.04,1
 48157,0.0,50.286686,-4.810984,England,Cornwall,0.07,0.08,1
 76413,0.0,53.83349,-1.58894,England,Leeds,0.07,0.2,1
 53103,0.0,51.530109,-1.896872,England,Wiltshire,0.07,0.04,1
@@ -866,7 +866,7 @@ E24718,0.0,52.29472,0.332298,England,Cambridgeshire,0.07,0,1
 1747,0.0,52.806646,-2.49764,England,Shropshire,0.07,0.16,1
 44201,0.0,50.613852,-1.958246,England,Dorset,0.07,0.17,1
 E24712,0.0,52.016759,-0.488107,England,Central Bedfordshire,0.07,0,1
-6077,0.0,55.207377,-2.040032,England,Northumberland,0.07,0,1
+6077,0.1,55.207377,-2.040032,England,Northumberland,0.07,0,1
 51124,0.0,51.207152,-3.536655,England,Somerset,0.07,0.05,1
 E24141,,52.307124,1.153055,England,Suffolk,0.07,0,1
 531179,0.0,51.460233,-2.609517,England,City of Bristol,0.07,0.2,1
@@ -1107,7 +1107,7 @@ E71440,0.0,51.277138,-1.712499,England,Wiltshire,0.07,0.04,1
 115329,0.0,57.59992025,-4.446997097,Scotland,Highland,0.08,0.08,2
 133077,0.0,55.58274848,-5.496523588,Scotland,Argyll and Bute,0.08,0.15,2
 115217,0.0,57.61125291,-3.115476523,Scotland,Moray,0.08,0,2
-234202,0.05,57.59587318,-5.005770119,Scotland,Highland,0.08,0.08,2
+234202,0.0,57.59587318,-5.005770119,Scotland,Highland,0.08,0.08,2
 464646,0.0,56.18484641,-3.532323684,Scotland,Perth and Kinross,0.08,0,2
 115557,0.0,55.24992466,-4.32205779,Scotland,Dumfries and Galloway,0.08,0.3,2
 377134,0.0,57.48325079,-4.006176025,Scotland,Highland,0.08,0.08,2
