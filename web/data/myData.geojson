@@ -1355,7 +1355,7 @@
                 ]
             },
             "properties": {
-                "rainfall": "0.026",
+                "rainfall": "0.013",
                 "country_code": 1
             }
         },
@@ -2405,7 +2405,7 @@
                 ]
             },
             "properties": {
-                "rainfall": "0.012",
+                "rainfall": "0.0",
                 "country_code": 1
             }
         },
@@ -9713,7 +9713,7 @@
                 ]
             },
             "properties": {
-                "rainfall": "0.1",
+                "rainfall": "0.0",
                 "country_code": 1
             }
         },
