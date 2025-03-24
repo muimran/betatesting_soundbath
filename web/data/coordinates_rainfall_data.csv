@@ -439,7 +439,7 @@ E7200,0.0,52.555577,-0.828089,England,Leicestershire,0.07,0,1
 E14080,0.0,51.252655,-1.256994,England,Hampshire,0.07,0.07,1
 E46061,0.0,53.546796,-0.159424,England,North East Lincolnshire,0.07,0,1
 1740,0.0,52.392235,-1.324715,England,Warwickshire,0.07,0.13,1
-E1681,0.0,51.067661,0.215829,England,East Sussex,0.07,0,1
+E1681,0.1,51.067661,0.215829,England,East Sussex,0.07,0,1
 E27621,0.0,51.542522,0.567655,England,Essex,0.07,0,1
 50110,0.0,51.016891,-3.822629,England,Devon,0.07,0.14,1
 3574,0.0,52.897659,-1.359998,England,Derbyshire,0.07,0.07,1
@@ -564,7 +564,7 @@ E1908,0.0,53.316679,-0.344986,England,Lincolnshire,0.07,0,1
 3380,0.0,53.405172,-1.738982,England,Derbyshire,0.07,0.07,1
 E5728,0.0,52.651369,0.565622,England,Norfolk,0.07,0,1
 E2578,0.0,52.890974,-0.512865,England,Lincolnshire,0.07,0,1
-E4090,0.0,51.297928,1.053239,England,Kent,0.07,0.01,1
+E4090,0.1,51.297928,1.053239,England,Kent,0.07,0.01,1
 68762,0.0,54.368186,-0.974109,England,North Yorkshire,0.07,0.06,1
 E24767,0.0,52.323479,1.278981,England,Suffolk,0.07,0,1
 53108,0.0,51.38314,-2.325412,England,Bath and North East Somerset,0.07,0.05,1
