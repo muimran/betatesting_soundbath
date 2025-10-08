@@ -174,7 +174,7 @@ E24763,0.0,51.949875,-0.766824,England,Buckinghamshire,0.07,0.07,1
 E7780,0.0,50.80213,0.081187,England,East Sussex,0.07,0,1
 43104,0.0,51.220377,-1.669896,England,Wiltshire,0.07,0.04,1
 248332TP,0.0,51.672207,-1.952948,England,Gloucestershire,0.07,0.1,1
-3816,0.4,53.130665,-1.23847,England,Nottinghamshire,0.07,0,1
+3816,0.0,53.130665,-1.23847,England,Nottinghamshire,0.07,0,1
 31555,0.0,54.469846,-1.099639,England,North Yorkshire,0.07,0.06,1
 E1320,0.0,51.202399,0.077705,England,Kent,0.07,0.01,1
 46100,0.0,50.390977,-3.70144,England,Devon,0.07,0.14,1
@@ -891,7 +891,7 @@ E24499,,52.702495,0.692966,England,Norfolk,0.07,0,1
 43533,0.0,53.999217,-0.43093,England,East Riding of Yorkshire,0.07,0,1
 E5720,,53.306737,-0.547985,England,Lincolnshire,0.07,0,1
 48102,0.0,50.223298,-5.305022,England,Cornwall,0.07,0.08,1
-613905,50.4,55.089491,-2.693238,England,Cumberland,0.07,0.07,1
+613905,0.0,55.089491,-2.693238,England,Cumberland,0.07,0.07,1
 54604,0.0,54.32908,-1.456389,England,North Yorkshire,0.07,0.06,1
 53113,0.0,51.290973,-1.963375,England,Wiltshire,0.07,0.04,1
 279941TP,0.0,51.396984,-0.540252,England,Surrey,0.07,0,1
@@ -1425,7 +1425,7 @@ E71440,0.0,51.277138,-1.712499,England,Wiltshire,0.07,0.04,1
 1129,0.0,52.039591,-3.9334614,Wales,Carmarthenshire,0.41,0.52,3
 1130,0.0,52.044935,-3.7468461,Wales,Carmarthenshire,0.41,0.52,3
 1131,0.0,51.89985,-3.7488421,Wales,Carmarthenshire,0.41,0.52,3
-1132,0.2,51.952713,-3.7835835,Wales,Carmarthenshire,0.41,0.52,3
+1132,0.0,51.952713,-3.7835835,Wales,Carmarthenshire,0.41,0.52,3
 1133,0.0,52.209938,-3.8141568,Wales,Ceredigion,0.41,0.2,3
 1134,0.0,52.005407,-4.2669858,Wales,Carmarthenshire,0.41,0.52,3
 1135,0.0,51.911631,-4.2592189,Wales,Carmarthenshire,0.41,0.52,3
